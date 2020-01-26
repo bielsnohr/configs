@@ -1,0 +1,12 @@
+#!/bin/bash
+case "$1" in
+  suspend)
+     ;;
+  resume)
+    export DISPLAY=":0"
+    export XAUTHORITY="/home/matthew/.Xauthority"
+    su matthew -c "sleep 4 && /usr/bin/xmodmap /home/matthew/.Xmodmap" &
+     ;;
+  *) exit $NA
+     ;;  
+esac

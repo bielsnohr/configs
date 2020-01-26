@@ -1,0 +1,60 @@
+#!/bin/sh
+# kFreeBSD do not accept scripts as interpreters, using #!/bin/sh and sourcing.
+if [ true != "$INIT_D_SCRIPT_SOURCED" ] ; then
+    set "$0" "$@"; INIT_D_SCRIPT_SOURCED=true . /lib/init/init-d-script
+fi
+### BEGIN INIT INFO
+# Provides:          set-keyboard
+# Required-Start:    $all
+# Required-Stop:     
+# Default-Start:     2 3 4 5
+# Default-Stop:      
+# Short-Description: Set keyboard mapping using xmodmap
+# Description:       Set keyboard mapping using xmodmap for Matthew Bluteau's
+# 		     ThinkPad-W540
+### END INIT INFO
+
+# Author: Matthew Bluteau <matthew.bluteau@gmail.com>
+# Notes:  Place this file in the /etc/init.d/ directory and make executable.
+# 	  Then, execute:
+#	  $ update-rc.d set-keyboard defaults
+
+export DISPLAY=":0"
+export USER_DEF="mbluteau"
+export XAUTHORITY="/home/$USER_DEF/.Xauthority"
+
+
+if [ -f /lib/lsb/init-functions ]; then
+    . /lib/lsb/init-functions
+else
+    log_action_begin_msg () {
+	echo -n "$@... "
+    }
+
+    log_action_end_msg () {
+	if [ "$1" -eq 0 ]; then 
+	    echo done.
+	else
+	    echo failed.
+	fi
+    }
+fi
+
+case "$1" in
+	start|force-reload|restart|reload)
+	        log_action_begin_msg "Setting keymap for user $USER_DEF"
+		if sudo -u $USER_DEF /usr/bin/xmodmap /home/$USER_DEF/.Xmodmap 2>/dev/null; then
+			log_action_end_msg 0
+		else
+			log_action_end_msg $?
+		fi
+		;;
+	stop|status)
+		# set-keyboard isn't a daemon
+		;;
+	*)
+		exit 1
+		;;
+esac
+
+exit 0
