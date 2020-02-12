@@ -16,10 +16,13 @@ fi
 
 # Author: Matthew Bluteau <matthew.bluteau@gmail.com>
 # Notes:  Place this file in the /etc/init.d/ directory and make executable.
+#         Place and .Xmodmap file in home directory.
 # 	  Then, execute:
 #	  $ update-rc.d set-keyboard defaults
+#         $ service set-keyboard start
 
 export DISPLAY=":0"
+# TODO need to fix this variable assignment to make it more portable
 export USER_DEF="mbluteau"
 export XAUTHORITY="/home/$USER_DEF/.Xauthority"
 
