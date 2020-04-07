@@ -65,8 +65,8 @@ map <C-p> "+gp
 map <C-S> "+y
 
 "  Swap file storage (to allow for recovery when editing on sshfs)
-"set directory=~/.tmp//
-"set backupdir=~/.bkp//
+set directory=~/.tmp//
+set backupdir=~/.bkp//
 
 "  Syntax Highlighting and Indentation
 syntax on
