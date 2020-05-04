@@ -14,7 +14,7 @@ alias safeunmount="sudo umount $HOME/safe && sudo cryptsetup luksClose volume1"
 alias adas12="cd $HOME/svn_adas/adas_dev/adas1#2/branch/mbluteau" 
 alias thesis="cd $HOME/workspace/phd-strath/papers/thesis" 
 alias study_music="play -n synth brownnoise synth pinknoise mix synth sine amod 0.3 30" 
-alias vpnin="sudo openfortivpn vpn.ukaea.uk:943 --username=mbluteau --trusted-cert=27241828974c6990b3a9a38f6ef1d73ed1b010c15b476b23539c284bd376c85a"
+alias vpnin="sudo openfortivpn vpn.ukaea.uk:943 --username=mbluteau"
 
 # Bash functions
 

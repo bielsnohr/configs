@@ -117,8 +117,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Modify executable path variable
-# export PATH="$HOME/anaconda3/bin:$PATH"  # commented out by conda initialize
+# Modify executable path variable for personal binaries
+export PATH="$HOME/bin:$PATH" 
 
 # Set preferred editing mode and editor
 set -o vi
@@ -169,3 +169,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
