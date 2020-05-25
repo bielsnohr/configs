@@ -1,18 +1,103 @@
 " -----------------------------------------------------------------------------
 "  Matthew Bluteau's vimrc file
 " -----------------------------------------------------------------------------
-let g:gundo_prefer_python3 = 1 
-" Pathogen stuff for autoloading packages in $VIM/bundles
-filetype off
-"call pathogen#incubate()
-call pathogen#infect()
-call pathogen#helptags()
-filetype on
+"  TODO check if this will be compatible with Vundle and is actually needed for
+"  gundo
+"let g:gundo_prefer_python3 = 1 
+
+"  Vundle
+" -----------------------------------------------------------------------------
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" Plugins
+" Python code folding
+Plugin 'tmhedberg/SimpylFold'
+" Indent Python correctly
+Plugin 'vim-scripts/indentpython.vim'
+" PEP8 compliance
+Plugin 'nvie/vim-flake8'
+" Code completion
+Plugin 'ycm-core/YouCompleteMe'
+" Syntax checker
+Plugin 'vim-syntastic/syntastic'
+" LaTeX integration
+Plugin 'vim-latex/vim-latex'
+" Color schemes
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+
+"" The following are examples of different formats supported.
+"" Keep Plugin commands between vundle#begin/end.
+"" plugin on GitHub repo
+"Plugin 'tpope/vim-fugitive'
+"" plugin from http://vim-scripts.org/vim/scripts.html
+"" Plugin 'L9'
+"" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+"" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+"" The sparkup vim script is in a subdirectory of this repo called vim.
+"" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+"" Install L9 and avoid a Naming conflict if you've already installed a
+"" different version somewhere else.
+"" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+" -----------------------------------------------------------------------------
+
+"  Python settings
+" --------------------------------------
+" TODO consider putting this into a separate file in
+" .vim/after/ftplugin/python.vim
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix 
+set encoding=utf-8
+let python_highlight_all=1
+" TODO supposedly this allows for virtual envs to work, test
+let g:ycm_python_binary_path = 'python'
+""virtualenv support TODO test if this works and how it will interact with conda
+""there is also vim-conda plugin that handles conda environments
+"python3 << EOF
+"import os
+"import sys
+"if 'VIRTUAL_ENV' in os.environ:
+"  project_base_dir = os.environ['VIRTUAL_ENV']
+"  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"  execfile(activate_this, dict(__file__=activate_this))
+"EOF
 
 "  Latex-Suite settings
 " --------------------------------------
-" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
-filetype plugin on
 " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
 " can be called correctly.
 set shellslash
@@ -20,8 +105,6 @@ set shellslash
 " search in a singe file. This will confuse Latex-Suite. Set your grep
 " program to always generate a file-name.
 set grepprg=grep\ -nH\ $*
-" OPTIONAL: This enables automatic indentation as you type.
-filetype indent on
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
@@ -29,15 +112,18 @@ let g:tex_flavor='latex'
 let g:tex_indent_items = 1
 let g:tex_indent_brace = 1
 
-"  Python settings
+"  YouCompleteMe settings
 " --------------------------------------
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-"  Supertab settings
-" --------------------------------------
-au FileType python set omnifunc=python3complete#Complete
-let g:SuperTabDefaultCompletionType = "context"
-set completeopt=menuone,longest,preview
-
+" TODO figure out settings for these plugins once reinstalled with Vundle
+""  Supertab settings
+"" --------------------------------------
+"au FileType python set omnifunc=python3complete#Complete
+"let g:SuperTabDefaultCompletionType = "context"
+"set completeopt=menuone,longest,preview
+"
 "  Syntastic settings
 " --------------------------------------
 set statusline+=%#warningmsg#
@@ -49,16 +135,28 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_python_checkers = ['pyflakes']
-let g:syntastic_python_python_exec = '/home/matthew/anaconda3/bin/python'
+"let g:syntastic_python_python_exec = '/home/matthew/anaconda3/bin/python'
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = ['perl']
 
-"  CommandT settings
+""  CommandT settings
+"" --------------------------------------
+"let g:CommandTWildIgnore=&wildignore . ",anaconda3/**"
+
+"  SimplyFold settings
 " --------------------------------------
-let g:CommandTWildIgnore=&wildignore . ",anaconda3/**"
+let g:SimpylFold_docstring_preview=1
 
 "  General settings
 " --------------------------------------
+"  Color schemes
+if has('gui_running')
+  set background=dark
+  colorscheme solarized
+else
+  colorscheme zenburn
+endif
+
 "  Copying and pasting mappings
 map <C-P> "+gP
 map <C-p> "+gp
@@ -70,8 +168,6 @@ set backupdir=~/.bkp//
 
 "  Syntax Highlighting and Indentation
 syntax on
-filetype indent plugin on
-filetype plugin indent on
 
 "  Key mappings
 map <leader>td  <Plug>TaskList
@@ -88,6 +184,8 @@ nnoremap ,cd :lcd %:p:h<CR>:pwd<CR>
 "  Code Folding
 set foldmethod=indent
 set foldlevel=99
+" Enable folding with the spacebar
+nnoremap<space> za
 
 "  Hard text wrapping so the below never needs to be implemented
 set tw=79
