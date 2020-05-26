@@ -20,6 +20,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Plugins
+" -------
 " Python code folding
 Plugin 'tmhedberg/SimpylFold'
 " Indent Python correctly
@@ -32,6 +33,14 @@ Plugin 'ycm-core/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
 " LaTeX integration
 Plugin 'vim-latex/vim-latex'
+" File tree viewer NERDtree
+Plugin 'preservim/nerdtree'
+" Fuzzy file search
+Plugin 'ctrlpvim/ctrlp.vim'
+" Git client
+Plugin 'tpope/vim-fugitive'
+" Enhanced status line
+Plugin 'powerline/powerline'
 " Color schemes
 Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
@@ -117,13 +126,6 @@ let g:tex_indent_brace = 1
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-" TODO figure out settings for these plugins once reinstalled with Vundle
-""  Supertab settings
-"" --------------------------------------
-"au FileType python set omnifunc=python3complete#Complete
-"let g:SuperTabDefaultCompletionType = "context"
-"set completeopt=menuone,longest,preview
-"
 "  Syntastic settings
 " --------------------------------------
 set statusline+=%#warningmsg#
@@ -139,9 +141,11 @@ let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = ['perl']
 
-""  CommandT settings
-"" --------------------------------------
-"let g:CommandTWildIgnore=&wildignore . ",anaconda3/**"
+"  CtrlP settings
+" --------------------------------------
+map <leader>p :CtrlP<CR>
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip 
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 "  SimplyFold settings
 " --------------------------------------
@@ -177,7 +181,7 @@ map <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>ev :sp $MYVIMRC<CR>
 "source vimrc quickly
 nnoremap <leader>sv :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-nmap cp :let @" = expand("%")
+nmap cp :let @" = expand("%")<CR>
 "change the local current working directory
 nnoremap ,cd :lcd %:p:h<CR>:pwd<CR>
 
