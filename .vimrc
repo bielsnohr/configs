@@ -40,7 +40,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 " Git client
 Plugin 'tpope/vim-fugitive'
 " Enhanced status line
-Plugin 'powerline/powerline'
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 " Color schemes
 Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
@@ -128,9 +128,9 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "  Syntastic settings
 " --------------------------------------
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -155,10 +155,10 @@ let g:SimpylFold_docstring_preview=1
 " --------------------------------------
 "  Color schemes
 if has('gui_running')
-  set background=dark
-  colorscheme solarized
+	set background=dark
+	colorscheme solarized
 else
-  colorscheme zenburn
+	colorscheme zenburn
 endif
 
 "  Copying and pasting mappings
@@ -200,7 +200,6 @@ set formatoptions+=t
 if version > 702
 	set colorcolumn=80
 else
-	"autocmd BufWinEnter * call matchadd('ErrorMsg', '\%>'.&l:textwidth.'v.\+', -1)
 	match ErrorMsg /\%>80v.\+/
 endif
 "  Keep closed buffers in the background
@@ -226,6 +225,9 @@ if has("gui_running")
 	set lines=999 columns=85
 	"  Set the font for gui application
 	set guifont=Monospace\ 11
+        let g:Powerline_symbols = 'fancy'
 endif
 "  Leave a highlight on the current line
 set cursorline
+" Always show status bar
+set laststatus=2
