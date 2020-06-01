@@ -4,7 +4,7 @@
 # unnecessary install
 gvim:
 	sudo aptitude update && sudo aptitude install vim-gtk3
-	sudo aptitude install build-essential cmake python3-dev 
+	sudo aptitude install build-essential cmake python3-dev fonts-powerline
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	vim +PluginInstall +qall
 	cd ~/.vim/bundle/YouCompleteMe
