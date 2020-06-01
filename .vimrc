@@ -140,6 +140,7 @@ let g:syntastic_python_checkers = ['pyflakes']
 "let g:syntastic_python_python_exec = '/home/matthew/anaconda3/bin/python'
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = ['perl']
+let g:syntastic_fortran_compiler = 'gfortran'
 
 "  CtrlP settings
 " --------------------------------------
@@ -149,7 +150,7 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 "  SimplyFold settings
 " --------------------------------------
-let g:SimpylFold_docstring_preview=1
+
 
 "  General settings
 " --------------------------------------
@@ -181,7 +182,7 @@ map <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>ev :sp $MYVIMRC<CR>
 "source vimrc quickly
 nnoremap <leader>sv :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-nmap cp :let @" = expand("%")<CR>
+nmap cp :let @" = expand("%:p")<CR>
 "change the local current working directory
 nnoremap ,cd :lcd %:p:h<CR>:pwd<CR>
 
