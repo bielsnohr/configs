@@ -9,3 +9,13 @@ gvim:
 	vim +PluginInstall +qall
 	cd ~/.vim/bundle/YouCompleteMe
 	/usr/bin/python3 install.py --clang-completer
+
+ukaea:
+	# Set up split vpn
+	git clone git@git.ccfe.ac.uk:mjuvonen/vpn_ukaea.git ~/src/vpn_ukaea
+	cd ~/src/vpn_ukaea
+	echo "Please modify to use your shortname."
+	vim bin/vpn_ukaea
+	sudo make install
+	cd
+
