@@ -39,6 +39,8 @@ Plugin 'preservim/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 " Git client
 Plugin 'tpope/vim-fugitive'
+" Task list of future development items
+Plugin 'vim-scripts/TaskList.vim'
 " Enhanced status line
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 " Color schemes
@@ -225,7 +227,7 @@ if has("gui_running")
 	"  Set window size
 	set lines=999 columns=85
 	"  Set the font for gui application
-	set guifont=Monospace\ 11
+	set guifont=Monospace\ 13
         let g:Powerline_symbols = 'fancy'
 endif
 "  Leave a highlight on the current line
