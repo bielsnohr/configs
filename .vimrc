@@ -126,7 +126,7 @@ let g:tex_indent_brace = 1
 "  YouCompleteMe settings
 " --------------------------------------
 let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>yg  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "  Syntastic settings
 " --------------------------------------
@@ -146,7 +146,7 @@ let g:syntastic_fortran_compiler = 'gfortran'
 
 "  CtrlP settings
 " --------------------------------------
-map <leader>p :CtrlP<CR>
+let g:ctrlp_map = '<leader>p'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip 
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
