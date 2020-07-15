@@ -17,6 +17,9 @@
 # full backups. A full backup (i.e. a checkpoint) is forced with
 # `--full-backup`. 
 
+# current user executing script
+cuser="$USER"
+
 #timestamp
 time_stamp=`date`
 
@@ -56,4 +59,4 @@ fi
 sudo tar $exdir --exclude-caches --listed-incremental=$snap -cvpz -f $bfile \
 	$sdir 2> "$ddir/err.log"
 
-sudo chown $USER:$USER $bfile
+sudo chown $cuser:$cuser $bfile
