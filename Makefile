@@ -1,5 +1,7 @@
 # Makefile for Matthew Bluteau's configuration on Ubuntu
 
+IPYTHON_CONFIG = ~/.ipython/profile_default/ipython_config.py
+
 # TODO add check of vim/gvim version before doing this to avoid
 # unnecessary install
 gvim:
@@ -18,4 +20,12 @@ ukaea:
 	vim bin/vpn_ukaea
 	sudo make install
 	cd
+
+ipython:
+ifeq ("$(wildcard $(IPYTHON_CONFIG))","")
+	ipython profile create
+endif
+	# uncomment relevant line in config file
+	sed -i s/"\#\(c\.TerminalInteractiveShell\.editing_mode.*vi.*$\)"/"\1"/ \
+		$(IPYTHON_CONFIG)
 
