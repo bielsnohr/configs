@@ -127,6 +127,7 @@ let g:tex_indent_brace = 1
 " --------------------------------------
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>yg  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>yd  :YcmCompleter GetDoc<CR>
 
 "  Syntastic settings
 " --------------------------------------
@@ -187,6 +188,12 @@ nnoremap <leader>sv :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc r
 nmap cp :let @" = expand("%:p")<CR>
 "change the local current working directory
 nnoremap ,cd :lcd %:p:h<CR>:pwd<CR>
+"use grep-like programs to search word under cursor in other files
+nnoremap gr :Ggrep! '\b<cword>\b' <CR>
+"nnoremap gr :grep <cword> *<CR>
+"nnoremap Gr :grep <cword> %:p:h/*<CR>
+"nnoremap gR :grep '\b<cword>\b' *<CR>
+"nnoremap GR :grep '\b<cword>\b' %:p:h/*<CR>
 
 "  Code Folding
 set foldmethod=indent
@@ -234,3 +241,10 @@ endif
 set cursorline
 " Always show status bar
 set laststatus=2
+
+" pandoc , markdown
+command! -nargs=* RunSilent
+      \ | execute ':silent !'.'<args>'
+      \ | execute ':redraw!'
+nmap <Leader>mc :RunSilent pandoc -o /tmp/vim-pandoc-out.pdf %<CR>
+nmap <Leader>mp :RunSilent evince /tmp/vim-pandoc-out.pdf &<CR>
