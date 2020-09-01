@@ -122,6 +122,7 @@ set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 let g:tex_indent_items = 1
 let g:tex_indent_brace = 1
+autocmd Filetype tex setlocal ts=2 sw=2 expandtab
 
 "  YouCompleteMe settings
 " --------------------------------------
@@ -234,7 +235,7 @@ if has("gui_running")
 	"  Set window size
 	set lines=999 columns=85
 	"  Set the font for gui application
-	set guifont=Monospace\ 13
+	set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 13
         let g:Powerline_symbols = 'fancy'
 endif
 "  Leave a highlight on the current line

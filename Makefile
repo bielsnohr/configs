@@ -5,12 +5,23 @@ IPYTHON_CONFIG = ~/.ipython/profile_default/ipython_config.py
 # TODO add check of vim/gvim version before doing this to avoid
 # unnecessary install
 gvim:
+	# Install big GUI vim from package manager
 	sudo aptitude update && sudo aptitude install vim-gtk3
+	# Other dependencies
 	sudo aptitude install build-essential cmake python3-dev fonts-powerline
+	# Install then run Vundle
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	vim +PluginInstall +qall
+	# YouCompleteMe requires an extra installation step
 	cd ~/.vim/bundle/YouCompleteMe
 	/usr/bin/python3 install.py --clang-completer
+	cd
+	# Install patched fonts for powerline
+	git clone https://github.com/powerline/fonts.git --depth=1
+	cd fonts
+	./install.sh
+	cd ..
+	rm -rf fonts
 
 ukaea:
 	# Set up split vpn
