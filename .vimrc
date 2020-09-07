@@ -140,7 +140,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
-let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_python_checkers = ['flake8', 'pyflakes']
 "let g:syntastic_python_python_exec = '/home/matthew/anaconda3/bin/python'
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = ['perl']
@@ -235,7 +235,7 @@ if has("gui_running")
 	"  Set window size
 	set lines=999 columns=85
 	"  Set the font for gui application
-	set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 13
+	set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 15
         let g:Powerline_symbols = 'fancy'
 endif
 "  Leave a highlight on the current line

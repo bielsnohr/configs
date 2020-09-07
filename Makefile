@@ -40,3 +40,18 @@ endif
 	sed -i s/"\#\(c\.TerminalInteractiveShell\.editing_mode.*vi.*$\)"/"\1"/ \
 		$(IPYTHON_CONFIG)
 
+onedrive:
+	sudo aptitude install build-essential libcurl4-openssl-dev libsqlite3-dev pkg-config git curl libnotify-dev
+	curl -fsS https://dlang.org/install.sh | bash -s dmd
+	# this only works if there is only one installation of dmd compiler
+	# present
+	source ~/dlang/dmd-2.0*/activate
+	cd ~/src
+	git clone https://github.com/abraunegg/onedrive.git
+	cd onedrive
+	./configure --enable-notifications --enable-completions
+	make clean; make;
+	sudo make install
+	deactivate
+	cd
+	echo "Visit https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md for details on authorisation steps and usage."
