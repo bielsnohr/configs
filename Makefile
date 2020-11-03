@@ -55,3 +55,9 @@ onedrive:
 	deactivate
 	cd
 	echo "Visit https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md for details on authorisation steps and usage."
+
+syncthing_autostart:
+ifeq ("$(wildcard ~/.config/autostart/.)","")
+	mkdir ~/.config/autostart
+endif
+	cp /usr/share/applications/syncthing-start.desktop ~/.config/autostart/
