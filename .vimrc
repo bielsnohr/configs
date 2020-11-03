@@ -41,6 +41,9 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 " Task list of future development items
 Plugin 'vim-scripts/TaskList.vim'
+" File history / change list tree
+" TODO this doesn't work with Python 3. Find an alternative that does.
+"Plugin 'sjl/gundo.vim'
 " Enhanced status line
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 " Color schemes
