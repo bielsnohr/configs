@@ -122,9 +122,11 @@ set grepprg=grep\ -nH\ $*
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
-let g:tex_flavor='latex'
+let g:tex_flavor = 'latex'
 let g:tex_indent_items = 1
 let g:tex_indent_brace = 1
+let g:Tex_UseMakefile = 0
+let g:Tex_DefaultTargetFormat = 'pdf'
 autocmd Filetype tex setlocal ts=2 sw=2 expandtab
 
 "  YouCompleteMe settings
