@@ -36,7 +36,7 @@ bfile="$ddir$(date +%F).$HOSTNAME.tar.gz"
 # excluded directories
 exdir="--exclude=backups --exclude=.cache --exclude=linux_home "
 exdir=$exdir" --exclude=linux_work --exclude=linux_jintrac_common "
-exdir=$exdir" --exclude=anaconda3"
+exdir=$exdir" --exclude=anaconda3 --exclude=Documents"
 
 #snapshot file name(with path)...change it according to machine
 snap="$HOME/backups/backup.snap"
