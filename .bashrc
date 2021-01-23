@@ -118,7 +118,7 @@ if ! shopt -oq posix; then
 fi
 
 # Modify executable path variable for personal binaries
-export PATH="$HOME/bin:$PATH" 
+export PATH="$HOME/bin:$HOME/Applications/adb-fastboot:$PATH" 
 
 # Set preferred editing mode and editor
 set -o vi
