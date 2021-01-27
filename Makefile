@@ -8,7 +8,7 @@ gvim:
 	# Install big GUI vim from package manager
 	sudo aptitude update && sudo aptitude install vim-gtk3
 	# Other dependencies
-	sudo aptitude install build-essential cmake python3-dev fonts-powerline
+	sudo aptitude install build-essential cmake python3-dev 
 	# Install then run Vundle
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	vim +PluginInstall +qall
