@@ -119,7 +119,7 @@ fi
 
 # Modify executable path variable for personal binaries
 PEACOCK="$HOME/work/projects/moose_fi_app/code/moose/python/peacock"
-export PATH="$PEACOCK:$HOME/bin:$PATH" 
+export PATH="$HOME/bin:$HOME/Applications/adb-fastboot:$PEACOCK:$PATH" 
 
 # Set preferred editing mode and editor
 set -o vi

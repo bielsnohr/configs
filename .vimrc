@@ -95,7 +95,7 @@ au BufNewFile,BufRead *.py
 set encoding=utf-8
 let python_highlight_all=1
 " TODO supposedly this allows for virtual envs to work, test
-let g:ycm_python_binary_path = 'python'
+"let g:ycm_python_binary_path = 'python'
 ""virtualenv support TODO test if this works and how it will interact with conda
 ""there is also vim-conda plugin that handles conda environments
 "python3 << EOF
@@ -133,6 +133,7 @@ autocmd Filetype tex setlocal ts=2 sw=2 expandtab
 "  YouCompleteMe settings
 " --------------------------------------
 let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_global_ycm_extra_conf = '~/configs/.ycm_extra_conf.py'
 map <leader>yg  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 map <leader>yd  :YcmCompleter GetDoc<CR>
 
