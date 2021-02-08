@@ -1,9 +1,6 @@
 " -----------------------------------------------------------------------------
 "  Matthew Bluteau's vimrc file
 " -----------------------------------------------------------------------------
-"  TODO check if this will be compatible with Vundle and is actually needed for
-"  gundo
-"let g:gundo_prefer_python3 = 1 
 
 "  Vundle
 " -----------------------------------------------------------------------------
@@ -109,6 +106,10 @@ let g:ycm_python_binary_path = 'python'
 "  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
 "  execfile(activate_this, dict(__file__=activate_this))
 "EOF
+
+"  C++ settings
+" --------------------------------------
+au Filetype cpp setlocal shiftwidth=2 softtabstop=2 expandtab
 
 "  Latex-Suite settings
 " --------------------------------------
