@@ -1,3 +1,5 @@
+#!/bin/bash -l
+#
 # tar_backup.sh
 # The contents of this file are released under the GNU General Public License.
 # Feel free to reuse the contents of this work, as long as the resultant works
@@ -5,9 +7,6 @@
 # Public License.
 # Originally By Arun Sori <arunsori94@gmail.com>
 # Modified By Matthew Bluteau <matthew.bluteau@gmail.com>
-
-# TODO make this into a cron job so it is done on a weekly basis (and remove
-# any previous backups if they are present?)
 
 # Purpose: For taking backup of the desired directory and store it locally
 #
@@ -27,11 +26,11 @@ time_stamp=`date`
 sdir="$HOME"
 
 #destination DIR
-ddir="$HOME/backups/"
+ddir="$HOME/backups"
 
 #backup file name 
 #Added date and Hostname on the filename 
-bfile="$ddir$(date +%F).$HOSTNAME.tar.gz"
+bfile="$ddir/$(date +%F).$HOSTNAME.tar.gz"
 
 # excluded directories
 exdir="--exclude=backups --exclude=.cache --exclude=linux_home "
@@ -41,8 +40,9 @@ exdir=$exdir" --exclude=anaconda3 --exclude=Documents"
 #snapshot file name(with path)...change it according to machine
 snap="$HOME/backups/backup.snap"
 
-
-echo "Taking Backup From $HOSTNAME at $time_stamp"
+#notify-send "Taking backup from $HOSTNAME at $time_stamp"
+echo "Taking backup from $HOSTNAME at $time_stamp"
+echo "Environment vars:$HOME $USER $PATH $HOSTNAME"
 
 if [[ $1 == "--full-backup" || ! -e $snap ]]
 then
@@ -52,11 +52,11 @@ then
 		echo "Archiving previous snapshot file to $snap-1"
 		mv $snap "$snap-1"
 	fi
-	bfile="${ddir}full-$(date +%F).$HOSTNAME.tar.gz"
+	bfile="${ddir}/full-$(date +%F).$HOSTNAME.tar.gz"
 fi
 
 # Takes the incremental backup if snapshot exists or full backup if not 
 sudo tar $exdir --exclude-caches --listed-incremental=$snap -cvpz -f $bfile \
-	$sdir 2> "$ddir/err.log"
+	$sdir 2> "${ddir}/err.log"
 
 sudo chown $cuser:$cuser $bfile
