@@ -94,16 +94,14 @@ au BufNewFile,BufRead *.py
     \ set fileformat=unix 
 set encoding=utf-8
 let python_highlight_all=1
-" TODO supposedly this allows for virtual envs to work, test
-"let g:ycm_python_binary_path = 'python'
-""virtualenv support TODO test if this works and how it will interact with conda
-""there is also vim-conda plugin that handles conda environments
-"python3 << EOF
+
+""python with virtualenv support
+"py3 << EOF
 "import os
 "import sys
 "if 'VIRTUAL_ENV' in os.environ:
 "  project_base_dir = os.environ['VIRTUAL_ENV']
-"  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"  activate_this = os.path.join(project_base_dir, 'bin/activate')
 "  execfile(activate_this, dict(__file__=activate_this))
 "EOF
 
