@@ -75,6 +75,11 @@ xterm*|rxvt*)
     ;;
 esac
 
+# Source pureline for a better prompt than the above
+if [ "$TERM" != "linux" ]; then
+    source ~/pureline/pureline ~/.pureline.conf
+fi
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -119,7 +124,8 @@ fi
 
 # Modify executable path variable for personal binaries
 PEACOCK="$HOME/work/projects/moose_fi_app/code/moose/python/peacock"
-export PATH="$HOME/bin:$HOME/Applications/adb-fastboot:$PEACOCK:$PATH" 
+PARAVIEW="$HOME/Applications/ParaView-5.9.0-MPI-Linux-Python3.8-64bit/bin"
+export PATH="$HOME/bin:$HOME/Applications/adb-fastboot:$PEACOCK:$PARAVIEW:$PATH" 
 
 # Set preferred editing mode and editor
 set -o vi
@@ -127,7 +133,7 @@ export EDITOR="gvim -f"
 
 # Python startup
 export PYTHONSTARTUP="$HOME/.pystartup"
-export PYTHONPATH="$HOME/anaconda3:$HOME/adas/python:/home/adas/python"
+#export PYTHONPATH="$HOME/adas/python:/home/adas/python"
 
 # Java setup for PaperScope
 export JAVA_HOME="/usr/bin/java"
@@ -155,21 +161,22 @@ fi
 # Allow forward and recursive-i-search
 stty -ixon
 
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$("/home/$USER/anaconda3/bin/conda" 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/mbluteau/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/$USER/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/$USER/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/mbluteau/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/home/mbluteau/miniforge3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/$USER/anaconda3/bin:$PATH"
+        export PATH="/home/mbluteau/miniforge3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"

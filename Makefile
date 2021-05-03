@@ -37,7 +37,7 @@ ifeq ("$(wildcard $(IPYTHON_CONFIG))","")
 	ipython profile create
 endif
 	# uncomment relevant line in config file
-	sed -i s/"\#\(c\.TerminalInteractiveShell\.editing_mode.*vi.*$\)"/"\1"/ \
+	sed -i -E 's/^\#\s*(c\.TerminalInteractiveShell\.editing_mode\s+=).*/\1 "vi"/' \
 		$(IPYTHON_CONFIG)
 
 onedrive:
@@ -61,3 +61,8 @@ ifeq ("$(wildcard ~/.config/autostart/.)","")
 	mkdir ~/.config/autostart
 endif
 	cp /usr/share/applications/syncthing-start.desktop ~/.config/autostart/
+
+pureline:
+	cd
+	git clone git@github.com:chris-marsh/pureline.git
+	ln -s ~/configs/.pureline.conf ~/.pureline.conf
