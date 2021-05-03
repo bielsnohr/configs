@@ -1,4 +1,8 @@
 # Makefile for Matthew Bluteau's configuration on Ubuntu
+# TODO my use of the `cd` command within make is incorrect because make creates
+# a new shell for each command. So, I either need to run scripts for some of
+# these steps, or look into another way for the current directory to be passed
+# between steps
 
 IPYTHON_CONFIG = ~/.ipython/profile_default/ipython_config.py
 
@@ -63,6 +67,5 @@ endif
 	cp /usr/share/applications/syncthing-start.desktop ~/.config/autostart/
 
 pureline:
-	cd
-	git clone git@github.com:chris-marsh/pureline.git
+	cd &&  git clone git@github.com:chris-marsh/pureline.git
 	ln -s ~/configs/.pureline.conf ~/.pureline.conf
