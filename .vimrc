@@ -1,9 +1,6 @@
 " -----------------------------------------------------------------------------
 "  Matthew Bluteau's vimrc file
 " -----------------------------------------------------------------------------
-"  TODO check if this will be compatible with Vundle and is actually needed for
-"  gundo
-"let g:gundo_prefer_python3 = 1 
 
 "  Vundle
 " -----------------------------------------------------------------------------
@@ -39,6 +36,11 @@ Plugin 'preservim/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 " Git client
 Plugin 'tpope/vim-fugitive'
+" Task list of future development items
+Plugin 'vim-scripts/TaskList.vim'
+" File history / change list tree
+" TODO this doesn't work with Python 3. Find an alternative that does.
+"Plugin 'sjl/gundo.vim'
 " Enhanced status line
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 " Color schemes
@@ -92,18 +94,20 @@ au BufNewFile,BufRead *.py
     \ set fileformat=unix 
 set encoding=utf-8
 let python_highlight_all=1
-" TODO supposedly this allows for virtual envs to work, test
-let g:ycm_python_binary_path = 'python'
-""virtualenv support TODO test if this works and how it will interact with conda
-""there is also vim-conda plugin that handles conda environments
-"python3 << EOF
+
+""python with virtualenv support
+"py3 << EOF
 "import os
 "import sys
 "if 'VIRTUAL_ENV' in os.environ:
 "  project_base_dir = os.environ['VIRTUAL_ENV']
-"  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"  activate_this = os.path.join(project_base_dir, 'bin/activate')
 "  execfile(activate_this, dict(__file__=activate_this))
 "EOF
+
+"  C++ settings
+" --------------------------------------
+au Filetype cpp setlocal shiftwidth=2 softtabstop=2 expandtab
 
 "  Latex-Suite settings
 " --------------------------------------
@@ -117,14 +121,19 @@ set grepprg=grep\ -nH\ $*
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
-let g:tex_flavor='latex'
+let g:tex_flavor = 'latex'
 let g:tex_indent_items = 1
 let g:tex_indent_brace = 1
+let g:Tex_UseMakefile = 0
+let g:Tex_DefaultTargetFormat = 'pdf'
+autocmd Filetype tex setlocal ts=2 sw=2 expandtab
 
 "  YouCompleteMe settings
 " --------------------------------------
 let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_global_ycm_extra_conf = '~/configs/.ycm_global_extra_conf.py'
+map <leader>yg  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>yd  :YcmCompleter GetDoc<CR>
 
 "  Syntastic settings
 " --------------------------------------
@@ -136,7 +145,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
-let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_python_checkers = ['flake8', 'pyflakes']
 "let g:syntastic_python_python_exec = '/home/matthew/anaconda3/bin/python'
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = ['perl']
@@ -144,7 +153,7 @@ let g:syntastic_fortran_compiler = 'gfortran'
 
 "  CtrlP settings
 " --------------------------------------
-map <leader>p :CtrlP<CR>
+let g:ctrlp_map = '<leader>p'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip 
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
@@ -185,6 +194,12 @@ nnoremap <leader>sv :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc r
 nmap cp :let @" = expand("%:p")<CR>
 "change the local current working directory
 nnoremap ,cd :lcd %:p:h<CR>:pwd<CR>
+"use grep-like programs to search word under cursor in other files
+nnoremap gr :Ggrep! '\b<cword>\b' <CR>
+"nnoremap gr :grep <cword> *<CR>
+"nnoremap Gr :grep <cword> %:p:h/*<CR>
+"nnoremap gR :grep '\b<cword>\b' *<CR>
+"nnoremap GR :grep '\b<cword>\b' %:p:h/*<CR>
 
 "  Code Folding
 set foldmethod=indent
@@ -225,10 +240,17 @@ if has("gui_running")
 	"  Set window size
 	set lines=999 columns=85
 	"  Set the font for gui application
-	set guifont=Monospace\ 11
+	set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 15
         let g:Powerline_symbols = 'fancy'
 endif
 "  Leave a highlight on the current line
 set cursorline
 " Always show status bar
 set laststatus=2
+
+" pandoc , markdown
+command! -nargs=* RunSilent
+      \ | execute ':silent !'.'<args>'
+      \ | execute ':redraw!'
+nmap <Leader>mc :RunSilent pandoc -o /tmp/vim-pandoc-out.pdf %<CR>
+nmap <Leader>mp :RunSilent evince /tmp/vim-pandoc-out.pdf &<CR>
