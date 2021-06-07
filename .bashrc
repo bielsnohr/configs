@@ -38,6 +38,7 @@ fi
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color) color_prompt=yes;;
+    screen) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -74,6 +75,11 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+
+# Set screen prompt
+if [ -n $STY ]; then
+    export PS1=$PS1
+fi
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then

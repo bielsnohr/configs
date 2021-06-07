@@ -36,7 +36,8 @@ scr_cd()
     screen -X chdir $PWD
 }
 export -f scr_cd
-if [ "$TERM" == 'screen' ]; then
+if [[ -n $STY ]] 
+then
     alias cd=scr_cd
 fi
 
