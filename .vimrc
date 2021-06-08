@@ -46,6 +46,9 @@ Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 " Color schemes
 Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
+" Markdown enhancements
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 "" The following are examples of different formats supported.
 "" Keep Plugin commands between vundle#begin/end.
