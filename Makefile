@@ -69,3 +69,7 @@ endif
 pureline:
 	cd &&  git clone git@github.com:chris-marsh/pureline.git
 	ln -s ~/configs/.pureline.conf ~/.pureline.conf
+
+git-lfs:
+	curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+	sudo apt install git-lfs
