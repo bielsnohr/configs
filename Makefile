@@ -77,3 +77,13 @@ git-lfs:
 bundler:
 	@# If ruby is updated, then my local bundle installation will break. It is a simple fix.
 	gem install bundler
+
+fix-imagemagick-policy:
+	@# For some reason, Ubuntu comes with certain GhostScript profiles
+	@# disabled for ImageMagick (and therefore convert won't work).
+	sudo sed -i_bak \
+	       	's/rights="none" pattern="PDF"/rights="read | write" pattern="PDF"/' \
+		/etc/ImageMagick-6/policy.xml
+
+clean-imagemagick-policy:
+	sudo mv /etc/ImageMagick-6/policy.xml_bak /etc/ImageMagick-6/policy.xml
