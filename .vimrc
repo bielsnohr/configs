@@ -160,9 +160,9 @@ let g:ctrlp_map = '<leader>p'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip 
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
-"  SimplyFold settings
+"  vim-markdown settings
 " --------------------------------------
-
+let g:vim_markdown_new_list_item_indent = 2
 
 "  General settings
 " --------------------------------------
