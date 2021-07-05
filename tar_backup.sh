@@ -60,3 +60,4 @@ sudo tar $exdir --exclude-caches --listed-incremental=$snap -cvpz -f $bfile \
 	$sdir 2> "${ddir}/err.log"
 
 sudo chown $cuser:$cuser $bfile
+sudo chown $cuser:$cuser $snap
