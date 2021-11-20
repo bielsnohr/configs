@@ -167,12 +167,8 @@ let g:vim_markdown_new_list_item_indent = 2
 "  General settings
 " --------------------------------------
 "  Color schemes
-if has('gui_running')
-	set background=dark
-	colorscheme solarized
-else
-	colorscheme zenburn
-endif
+set background=light
+colorscheme solarized
 
 "  Copying and pasting mappings
 map <C-P> "+gP
