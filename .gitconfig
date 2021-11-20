@@ -1,0 +1,7 @@
+[user]
+	email = matthew.bluteau@ukaea.uk
+	name = Matthew Bluteau
+[core]
+	editor = gvim -f
+[alias]
+	st = -p status
