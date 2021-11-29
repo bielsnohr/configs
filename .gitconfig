@@ -1,7 +1,14 @@
 [user]
 	email = matthew.bluteau@ukaea.uk
 	name = Matthew Bluteau
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 [core]
 	editor = gvim -f
 [alias]
 	st = -p status
+	tree-history = log --all --graph --decorate --oneline
+	new = !git init && git symbolic-ref HEAD refs/heads/main
