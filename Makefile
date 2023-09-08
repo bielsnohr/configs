@@ -3,6 +3,8 @@
 # a new shell for each command. So, I either need to run scripts for some of
 # these steps, or look into another way for the current directory to be passed
 # between steps
+# TODO it looks like an `install.sh` script is the preferred method for GitHub
+# dotfiles, so convert this to a shell script
 
 IPYTHON_CONFIG = ~/.ipython/profile_default/ipython_config.py
 
@@ -37,6 +39,7 @@ ukaea:
 	cd
 
 ipython:
+	python -m pip install --user ipython
 ifeq ("$(wildcard $(IPYTHON_CONFIG))","")
 	ipython profile create
 endif
@@ -87,3 +90,28 @@ fix-imagemagick-policy:
 
 clean-imagemagick-policy:
 	sudo mv /etc/ImageMagick-6/policy.xml_bak /etc/ImageMagick-6/policy.xml
+
+load-terminal-profiles:
+	dconf load /org/gnome/terminal/legacy/ < ~/configs/gnome_terminal_profiles.txt 
+
+python-poetry:
+	curl -sSL https://install.python-poetry.org | python3 -
+	poetry completions bash | sudo tee /etc/bash_completion.d/poetry > /dev/null
+
+fish-default-shell:
+	sudo apt install fish
+	# somehow fish is able to pick up PATH values set by bashrc, so no need
+	# for anything further
+	chsh -s $(which fish)
+
+npm:
+	curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
+	sudo bash nodesource_setup.sh
+	sudo apt update
+	sudo apt install nodejs
+
+gitmoji: npm
+	mkdir -p $HOME/.npm-global/bin
+	fish_add_path $HOME/.npm-global/bin
+	npm config set prefix ~/.npm-global
+	npm i -g gitmoji-cli
