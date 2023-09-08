@@ -7,8 +7,12 @@
 	process = git-lfs filter-process
 	required = true
 [core]
-	editor = gvim -f
+	editor = vim
+	autocrlf = input
 [alias]
 	st = -p status
 	tree-history = log --all --graph --decorate --oneline
 	new = !git init && git symbolic-ref HEAD refs/heads/main
+	mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+[init]
+	defaultBranch = main
