@@ -11,6 +11,7 @@ TODO:
 - automatically add key shortcut for Keepass autocomplete
 - write a bash script or makefile to automate the above linking
 - implement interim solution for keyboard in Makefile
+  - the command line way per-user: `gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']"`
   - edit the file `/etc/default/keyboard` to have the line
     `XKBOPTIONS="ctrl:swapcaps"`
   - be careful that there might be options already set, so this should be
