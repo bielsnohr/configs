@@ -24,8 +24,6 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 " PEP8 compliance
 Plugin 'nvie/vim-flake8'
-" Code completion
-Plugin 'ycm-core/YouCompleteMe'
 " Syntax checker
 Plugin 'vim-syntastic/syntastic'
 " LaTeX integration
@@ -35,7 +33,8 @@ Plugin 'preservim/nerdtree'
 " Fuzzy file search
 Plugin 'ctrlpvim/ctrlp.vim'
 " Git client
-Plugin 'tpope/vim-fugitive'
+" TODO requires update but I am on a train without sufficient internet
+"Plugin 'tpope/vim-fugitive'
 " Task list of future development items
 Plugin 'vim-scripts/TaskList.vim'
 " File history / change list tree
@@ -44,8 +43,8 @@ Plugin 'vim-scripts/TaskList.vim'
 " Enhanced status line
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 " Color schemes
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'jnurmine/Zenburn'
+"Plugin 'altercation/vim-colors-solarized'
 " Markdown enhancements
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
@@ -166,9 +165,6 @@ let g:vim_markdown_new_list_item_indent = 2
 
 "  General settings
 " --------------------------------------
-"  Color schemes
-set background=light
-colorscheme solarized
 
 "  Copying and pasting mappings
 map <C-P> "+gP
