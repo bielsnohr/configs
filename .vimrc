@@ -33,8 +33,7 @@ Plugin 'preservim/nerdtree'
 " Fuzzy file search
 Plugin 'ctrlpvim/ctrlp.vim'
 " Git client
-" TODO requires update but I am on a train without sufficient internet
-"Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 " Task list of future development items
 Plugin 'vim-scripts/TaskList.vim'
 " File history / change list tree
