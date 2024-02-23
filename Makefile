@@ -47,22 +47,6 @@ endif
 	sed -i -E 's/^\#\s*(c\.TerminalInteractiveShell\.editing_mode\s+=).*/\1 "vi"/' \
 		$(IPYTHON_CONFIG)
 
-onedrive:
-	sudo aptitude install build-essential libcurl4-openssl-dev libsqlite3-dev pkg-config git curl libnotify-dev
-	curl -fsS https://dlang.org/install.sh | bash -s dmd
-	# this only works if there is only one installation of dmd compiler
-	# present
-	source ~/dlang/dmd-2.0*/activate
-	cd ~/src
-	git clone https://github.com/abraunegg/onedrive.git
-	cd onedrive
-	./configure --enable-notifications --enable-completions
-	make clean; make;
-	sudo make install
-	deactivate
-	cd
-	echo "Visit https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md for details on authorisation steps and usage."
-
 syncthing_autostart:
 ifeq ("$(wildcard ~/.config/autostart/.)","")
 	mkdir ~/.config/autostart
@@ -94,10 +78,16 @@ clean-imagemagick-policy:
 load-terminal-profiles:
 	dconf load /org/gnome/terminal/legacy/ < ~/configs/gnome_terminal_profiles.txt 
 
-python-poetry:
-	curl -sSL https://install.python-poetry.org | python3 -
-	poetry completions bash | sudo tee /etc/bash_completion.d/poetry > /dev/null
+pipx:
+	@# TODO pipx should be included in whatever base Python environment I
+	@# come up with
+	python -m pip install --user pipx
+	python -m pipx ensurepath
 
+python-poetry: pipx
+	pipx install poetry
+	poetry completions fish > ~/.config/fish/completions/poetry.fish
+	
 fish-default-shell:
 	sudo apt install fish
 	# somehow fish is able to pick up PATH values set by bashrc, so no need
@@ -115,3 +105,12 @@ gitmoji: npm
 	fish_add_path $HOME/.npm-global/bin
 	npm config set prefix ~/.npm-global
 	npm i -g gitmoji-cli
+
+firefox:
+	@# Lamentably, the snap and flatpak firefox cause issues with password
+	@# manager integrations. Use the deb for the time being
+	sudo add-apt-repository ppa:mozillateam/ppa
+	echo '\nPackage: firefox* \nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1001\n\n' | sudo tee /etc/apt/preferences.d/mozilla
+	echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+	sudo apt install firefox
+
