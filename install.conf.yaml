@@ -1,15 +1,17 @@
 - defaults:
     link:
+      create: true
       relink: true
 
-- clean: ['~']
+- clean: ["~"]
 
 - link:
     ~/.vimrc: .vimrc
     ~/.gitconfig: .gitconfig
+    ~/.ssh/config: .ssh_config
 
 - create:
-    - ~/downloads
+    - ~/Downloads
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
+    - [git submodule update --init --recursive, Installing submodules]
