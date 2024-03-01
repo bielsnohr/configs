@@ -94,6 +94,10 @@ fish-default-shell:
 	# for anything further
 	chsh -s $(which fish)
 
+omf:
+	curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > install-omf
+	fish install-omf --path=~/.local/share/omf --config=~/.config/omf
+
 npm:
 	curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
 	sudo bash nodesource_setup.sh

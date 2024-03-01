@@ -8,8 +8,10 @@ Files that need to be linked:
 - .ssh/config -> ~/.ssh/config
 
 TODO:
+- Dotbot conversion
+  - Add remaining files to be linked by looking at those in home folder
+  - Figure out how fish configuration should be synced and copied around
 - automatically add key shortcut for Keepass autocomplete
-- write a bash script or makefile to automate the above linking
 - implement interim solution for keyboard in Makefile
   - the command line way per-user: `gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']"`
   - edit the file `/etc/default/keyboard` to have the line

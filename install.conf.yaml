@@ -9,9 +9,16 @@
     ~/.vimrc: .vimrc
     ~/.gitconfig: .gitconfig
     ~/.ssh/config: .ssh_config
+    ~/.config/fish:
+      path: fish
+      force: true
+    ~/.config/omf: 
+      path: omf
+      force: true
 
 - create:
     - ~/Downloads
+    - "~/.config"
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
