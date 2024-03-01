@@ -1,6 +1,5 @@
 # Matthew Bluteau's Configuration Files
 
-
 Files that need to be linked:
 - .bashrc -> ~/.bashrc
 - .bash_profile -> ~/.bash_profile
@@ -10,7 +9,6 @@ Files that need to be linked:
 TODO:
 - Dotbot conversion
   - Add remaining files to be linked by looking at those in home folder
-  - Figure out how fish configuration should be synced and copied around
 - automatically add key shortcut for Keepass autocomplete
 - implement interim solution for keyboard in Makefile
   - the command line way per-user: `gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']"`
