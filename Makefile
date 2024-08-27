@@ -7,6 +7,7 @@
 # dotfiles, so convert this to a shell script
 
 IPYTHON_CONFIG = ~/.ipython/profile_default/ipython_config.py
+.PHONY: install-omf
 
 # TODO add check of vim/gvim version before doing this to avoid
 # unnecessary install
@@ -94,7 +95,7 @@ fish-default-shell:
 	# for anything further
 	chsh -s $(which fish)
 
-omf:
+install-omf:
 	curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > install-omf
 	fish install-omf --path=~/.local/share/omf --config=~/.config/omf
 
