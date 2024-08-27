@@ -1,0 +1,19 @@
+---
+- name: Sync Ubuntu machines
+  hosts: localhost
+  become: yes
+
+  tasks:
+  - name: Install packages
+    ansible.builtin.apt:
+      state: present
+      pkg:
+        - git
+        - vim
+        - curl
+        - inkscape
+
+  - name: Clean up
+    ansible.builtin.apt:
+      autoclean: yes
+      autoremove: yes
