@@ -24,6 +24,22 @@ TODO:
 - use of `ukaea_mount.sh` requires creation of `~/linux_{home,work}`, so put
   this in makefile as well
 
+## Automatic Backups
+
+- 2022-08-08
+  - This is all a bit of a mess at the moment
+  - It would appear I lost all of the modifications I made on the backup_data.sh script for my new system
+    - I need to make a variable for the user name and propagate that to all of the relevant other paths
+    - then, put this in `~/.local/bin`
+  - The `backup-data.service` file needs to go at `/etc/systemd/system/backup-data.service` and then run
+    ```bash
+    sudo systemctl start backup-data.service
+    sudo systemctl enable backup-data.service
+    # you might need to do a `sudo systemctl daemon-reload`
+    ```
+  - Also, it looks like the backup 2021-04-25 has not completed because a lot of
+    the directories are empty. I should probably just do a full backup.
+
 ## Obsolete
 
 - setxkbmap.desktop -> ~/.config/autostart/setxkbmap.desktop (to set keyboard

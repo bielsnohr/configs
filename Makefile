@@ -120,4 +120,29 @@ firefox:
 	echo '\nPackage: firefox* \nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1001\n\n' | sudo tee /etc/apt/preferences.d/mozilla
 	echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 	sudo apt install firefox
+nodejs:
+	curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
+	sudo bash /tmp/nodesource_setup.sh
+	sudo apt install nodejs
+	curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
+	echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+yarn: nodejs
+	sudo apt-get update && sudo apt-get install yarn
+
+actual-finance: yarn
+	git clone https://github.com/actualbudget/actual-server.git
+	cd actual-server
+	yarn install
+	yarn start
+
+zotero:
+	wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | sudo bash
+	sudo apt update
+	sudo apt install zotero
+
+flatpak:
+	sudo apt install flatpak
+	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+	flatpak install flathub com.github.tchx84.Flatseal
 

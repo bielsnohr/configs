@@ -131,7 +131,7 @@ fi
 # Modify executable path variable for personal binaries
 PEACOCK="$HOME/work/projects/moose_fi_app/code/moose/python/peacock"
 PARAVIEW="$HOME/Applications/ParaView-5.9.0-MPI-Linux-Python3.8-64bit/bin"
-export PATH="$HOME/bin:$HOME/Applications/adb-fastboot:$PEACOCK:$PARAVIEW:$PATH" 
+export PATH="$HOME/bin:$HOME/Applications/adb-fastboot:$PEACOCK:$PARAVIEW:$HOME/.local/bin:$PATH" 
 
 # Set preferred editing mode and editor
 set -o vi
