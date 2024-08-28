@@ -1,7 +1,9 @@
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-eval /home/mbluteau/miniforge3/bin/conda "shell.fish" "hook" $argv | source
+if test -e $HOME/miniforge3/bin/conda
+    eval $HOME/miniforge3/bin/conda "shell.fish" "hook" $argv | source
+end
 # <<< conda initialize <<<
 
 ## Install Ruby Gems to ~/gems

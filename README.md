@@ -22,6 +22,7 @@ TODO:
   this in makefile as well
 
 ## Obsolete
+
 - setxkbmap.desktop -> ~/.config/autostart/setxkbmap.desktop (to set keyboard
   mappings)
   - Update 2020-02-18: this isn't really a solution because it is reset

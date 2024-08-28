@@ -7,7 +7,7 @@
 # dotfiles, so convert this to a shell script
 
 IPYTHON_CONFIG = ~/.ipython/profile_default/ipython_config.py
-.PHONY: install-omf
+.PHONY: install-omf fish-default-shell
 
 # TODO add check of vim/gvim version before doing this to avoid
 # unnecessary install
@@ -90,7 +90,9 @@ python-poetry: pipx
 	poetry completions fish > ~/.config/fish/completions/poetry.fish
 	
 fish-default-shell:
-	sudo apt install fish
+	sudo add-apt-repository ppa:fish-shell/release-3
+	sudo apt update
+	sudo apt install fish=3.7.1-1~jammy
 	# somehow fish is able to pick up PATH values set by bashrc, so no need
 	# for anything further
 	chsh -s $(which fish)
