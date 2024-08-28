@@ -9,6 +9,8 @@ Files that need to be linked:
 TODO:
 - Dotbot conversion
   - Add remaining files to be linked by looking at those in home folder
+  - A very basic setup is most of the way there. Fish and omf work when installed in conjunction
+    with the Makefile. In order to use dotbot, the command is `git clone $url && cd dotfiles && ./install`
 - automatically add key shortcut for Keepass autocomplete
 - implement interim solution for keyboard in Makefile
   - the command line way per-user: `gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']"`

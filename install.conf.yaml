@@ -15,10 +15,11 @@
     ~/.config/omf: 
       path: omf
       force: true
+    ~/.config/terminator/config: terminator_config
 
 - create:
     - ~/Downloads
-    - "~/.config"
+    - ~/.config
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
