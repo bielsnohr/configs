@@ -16,6 +16,8 @@
       path: omf
       force: true
     ~/.config/terminator/config: terminator_config
+    ~/.bashrc: .bashrc
+    ~/.bash_profile: .bash_profile
 
 - create:
     - ~/Downloads

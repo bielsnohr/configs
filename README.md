@@ -1,17 +1,20 @@
 # Matthew Bluteau's Configuration Files
 
-Files that need to be linked:
-- .bashrc -> ~/.bashrc
-- .bash_profile -> ~/.bash_profile
-- .pystartup -> ~/.pystartup
-- .ssh/config -> ~/.ssh/config
-
 TODO:
+
 - Dotbot conversion
   - Add remaining files to be linked by looking at those in home folder
   - A very basic setup is most of the way there. Fish and omf work when installed in conjunction
     with the Makefile. In order to use dotbot, the command is `git clone $url && cd dotfiles && ./install`
+  - .pystartup -> ~/.pystartup
 - automatically add key shortcut for Keepass autocomplete
+- default terminal application is set by `update-alternatives --config x-terminal-emulator`, however
+  this does mean its icon doesn't display quite properly, which is minor
+- additional shortcut for opening terminal is set in dconf
+  `org.gnome.settings-daemon.plugins.media-keys="['<Primary><Alt>t', '<Primary><Alt>n']"`
+- UKAEA specific config
+  - VPN script, clone it into my user space
+  - Network configuration
 - implement interim solution for keyboard in Makefile
   - the command line way per-user: `gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']"`
   - edit the file `/etc/default/keyboard` to have the line
