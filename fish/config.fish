@@ -14,4 +14,4 @@ set --export GEM_PATH $HOME/gems
 set --export NPM_CONFIG_PREFIX ~/.npm-global
 
 ## Global Path
-fish_add_path --global ~/bin ~/.npm-global/bin ~/.local/bin ~/gems/bin
+fish_add_path --global ~/bin ~/.npm-global/bin ~/.local/bin ~/gems/bin ~/.local/share/JetBrains/Toolbox/scripts
