@@ -7,28 +7,41 @@
 # dotfiles, so convert this to a shell script
 
 IPYTHON_CONFIG = ~/.ipython/profile_default/ipython_config.py
-.PHONY: install-omf fish-default-shell
+.PHONY: install-omf fish-default-shell powerline-font gvim
 
 # TODO add check of vim/gvim version before doing this to avoid
 # unnecessary install
-gvim:
+gvim: powerline-font
 	# Install big GUI vim from package manager
-	sudo aptitude update && sudo aptitude install vim-gtk3
+	sudo apt update && sudo apt install --yes vim-gtk3
 	# Other dependencies
-	sudo aptitude install build-essential cmake python3-dev 
+	sudo apt install --yes build-essential cmake python3-dev 
 	# Install then run Vundle
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	vim +PluginInstall +qall
-	# YouCompleteMe requires an extra installation step
-	cd ~/.vim/bundle/YouCompleteMe
-	/usr/bin/python3 install.py --clang-completer
-	cd
+
+powerline-font:
 	# Install patched fonts for powerline
 	git clone https://github.com/powerline/fonts.git --depth=1
-	cd fonts
-	./install.sh
-	cd ..
+	cd fonts && ./install.sh
 	rm -rf fonts
+
+appimaged:
+	@# System integration for AppImages
+	@# Remove pre-existing conflicting tools (if any)
+	systemctl --user stop appimaged.service || true
+	sudo apt-get -y purge appimagelauncher || true
+	[ -f ~/.config/systemd/user/default.target.wants/appimagelauncherd.service ] && rm ~/.config/systemd/user/default.target.wants/appimagelauncherd.service
+	@# Clear cache
+	rm "$HOME"/.local/share/applications/appimage*
+	@# Restart any lingering daemons cleared out above
+	systemctl --user daemon-reload
+	@# Download
+	mkdir -p ~/Applications
+	wget -c https://github.com/$(wget -q https://github.com/probonopd/go-appimage/releases/expanded_assets/continuous -O - | grep "appimaged-.*-x86_64.AppImage" | head -n 1 | cut -d '"' -f 2) -P ~/Applications/
+	chmod +x ~/Applications/appimaged-*.AppImage
+	# Launch
+	~/Applications/appimaged-*.AppImage
 
 ukaea:
 	# Set up split vpn
@@ -79,13 +92,7 @@ clean-imagemagick-policy:
 load-terminal-profiles:
 	dconf load /org/gnome/terminal/legacy/ < ~/configs/gnome_terminal_profiles.txt 
 
-pipx:
-	@# TODO pipx should be included in whatever base Python environment I
-	@# come up with
-	python -m pip install --user pipx
-	python -m pipx ensurepath
-
-python-poetry: pipx
+python-poetry:
 	pipx install poetry
 	poetry completions fish > ~/.config/fish/completions/poetry.fish
 	
@@ -97,7 +104,7 @@ fish-default-shell:
 	# for anything further
 	chsh -s $(which fish)
 
-install-omf:
+install-omf: fish-default-shell
 	curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > install-omf
 	fish install-omf --path=~/.local/share/omf --config=~/.config/omf
 
@@ -115,11 +122,15 @@ gitmoji: npm
 
 firefox:
 	@# Lamentably, the snap and flatpak firefox cause issues with password
-	@# manager integrations. Use the deb for the time being
+	@# manager integrations. Use the deb for the time being.
+	@# Get rid of any current versions of firefox first
+	sudo snap remove firefox
+	sudo apt remove firefox
 	sudo add-apt-repository ppa:mozillateam/ppa
 	echo '\nPackage: firefox* \nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1001\n\n' | sudo tee /etc/apt/preferences.d/mozilla
 	echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 	sudo apt install firefox
+
 nodejs:
 	curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
 	sudo bash /tmp/nodesource_setup.sh

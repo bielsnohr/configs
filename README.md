@@ -1,12 +1,10 @@
 # Matthew Bluteau's Configuration Files
 
-TODO:
+## TODO
 
-- Dotbot conversion
-  - Add remaining files to be linked by looking at those in home folder
-  - A very basic setup is most of the way there. Fish and omf work when installed in conjunction
-    with the Makefile. In order to use dotbot, the command is `git clone $url && cd dotfiles && ./install`
-  - .pystartup -> ~/.pystartup
+- A default Python environment with some base packages installed
+  - pipx
+  - probably want to move to something like `uv` or `pyenv` for this
 - automatically add key shortcut for Keepass autocomplete
 - default terminal application is set by `update-alternatives --config x-terminal-emulator`, however
   this does mean its icon doesn't display quite properly, which is minor
@@ -24,32 +22,34 @@ TODO:
 - use of `ukaea_mount.sh` requires creation of `~/linux_{home,work}`, so put
   this in makefile as well
 
-## Automatic Backups
+## New System Installation Steps
 
-- 2022-08-08
-  - This is all a bit of a mess at the moment
-  - It would appear I lost all of the modifications I made on the backup_data.sh script for my new system
-    - I need to make a variable for the user name and propagate that to all of the relevant other paths
-    - then, put this in `~/.local/bin`
-  - The `backup-data.service` file needs to go at `/etc/systemd/system/backup-data.service` and then run
+1. Install git and clone this repo:
+
     ```bash
-    sudo systemctl start backup-data.service
-    sudo systemctl enable backup-data.service
-    # you might need to do a `sudo systemctl daemon-reload`
+    sudo apt update && sudo apt install --yes git
+    git clone https://github.com/bielsnohr/configs.git
     ```
-  - Also, it looks like the backup 2021-04-25 has not completed because a lot of
-    the directories are empty. I should probably just do a full backup.
 
-## Obsolete
+2. Run dotbot to put configuration files in place:
 
-- setxkbmap.desktop -> ~/.config/autostart/setxkbmap.desktop (to set keyboard
-  mappings)
-  - Update 2020-02-18: this isn't really a solution because it is reset
-    whenever a new keyboard is connected or when hibernate/sleep is entered
-    - better solution above, old notes below
-  - this was an absolute palaver to figure out
-  - Wayland screws around with GDM which itself screws with Xorg and Xsession
-    loading, making it nearly impossible to set anything X-related on a
-    per-user (let alone system wide) basis
-  - Therefore, the easiest route was to make a simple startup application file
-    that gets reliably executed at login
+    ```bash
+    cd configs && ./install
+    ```
+
+3. Install ansible:
+
+    ```bash
+    sudo apt update && sudo apt install --yes python3-pip pipx
+    pipx ensurepath
+    pipx install --include-deps ansible
+    ```
+
+4. Run ansible playbook:
+
+    ```bash
+    # Add `--check` argument to see what the effects will be before actually
+    # executing them
+    ansible-playbook --ask-become-pass --verbose playbook.yml
+    ```
+    

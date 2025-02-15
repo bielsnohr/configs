@@ -1,19 +1,48 @@
 ---
 - name: Sync Ubuntu machines
   hosts: localhost
+  connection: local
+  gather_facts: no
   become: yes
 
   tasks:
-  - name: Install packages
+  # Fish doesn't have a build for Ubuntu 24.04 Noble in its more 
+  # up-to-date repo yet. Use the below once it does.
+  #
+  #- name: Add additional PPAs for installation sources
+  #  ansible.builtin.apt_repository:
+  #    repo: "{{ item }}"
+  #    state: present
+  #  loop:
+  #    - ppa:fish-shell/release-3
+  #
+  #- name: Install specific version of fish and prevent upgrades
+  #  ansible.builtin.apt:
+  #    name: fish
+  #    state: fixed
+  #    version: '3.7.1-1'
+
+  - name: Install apt-based packages
     ansible.builtin.apt:
       state: present
       pkg:
         - git
-        - vim
+        - vim-gtk3
+        - make
         - curl
         - inkscape
+        - gnome-tweaks
+        - libfuse2 # for AppImages
+        - ssh
+        - terminator # should also set the default terminal app
+        - fish=3.7.*
 
   - name: Clean up
     ansible.builtin.apt:
       autoclean: yes
       autoremove: yes
+
+  - name: Set default shell
+    ansible.builtin.user:
+      name: mbluteau
+      shell: /usr/bin/fish
