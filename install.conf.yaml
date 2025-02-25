@@ -18,6 +18,7 @@
     ~/.config/terminator/config: terminator_config
     ~/.bashrc: .bashrc
     ~/.bash_profile: .bash_profile
+    ~/.Rprofile: Rprofile
 
 - create:
     - ~/Downloads
