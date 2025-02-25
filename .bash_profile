@@ -5,3 +5,4 @@ if [ -f ~/.bashrc ]
     # shellcheck source=/dev/null
     source ~/.bashrc
 fi
+. "$HOME/.cargo/env"

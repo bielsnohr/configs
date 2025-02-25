@@ -7,10 +7,20 @@
 # UPDATE (2016-05-12): the ssh restrictions at CCFE have been relaxed, and I
 # can now ssh directly to my private server without a proxy
 #
-#Match exec "cat /etc/resolv.conf | grep -q -i CCFE" originalhost mbluteau.ddns.net 
+#Match exec "cat /etc/resolv.conf | grep -q -i CCFE" originalhost mbluteau.ddns.net
 #	ProxyCommand ssh -W %h:%p mbluteau@ferro.phys.strath.ac.uk
 
 ServerAliveInterval 10
+
+Host bluemira-training
+	User bluemira
+	#HostName bluemira-b250m-d3h.ccfepc.ccfe.ac.uk
+	HostName bluemira-training.ukaea.uk
+
+Host archer2
+	User ta196blut1
+	HostName login.archer2.ac.uk
+	IdentityFile ~/.ssh/archer2_ed25519
 
 Host ferro
 	User mbluteau
@@ -51,5 +61,5 @@ Host ripley
 	ProxyCommand ssh -W %h:%p mbluteau@ferro.phys.strath.ac.uk
 
 Host github.com
-        Hostname ssh.github.com
-        Port 443
+	Hostname ssh.github.com
+	Port 443
