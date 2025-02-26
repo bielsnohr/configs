@@ -32,10 +32,21 @@
         - curl
         - inkscape
         - gnome-tweaks
-        - libfuse2 # for AppImages
         - ssh
         - terminator # should also set the default terminal app
         - fish=3.7.*
+        # for AppImages and JetBrains Toolbox
+        - libfuse2 
+        - libxi6
+        - libxrender1
+        - libxtst6
+        - mesa-utils
+        - libfontconfig
+        - libgtk-3-bin
+        - tar
+        - dbus-user-session
+        # For connecting to android devices
+        - android-sdk-platform-tools-common
 
   - name: Clean up
     ansible.builtin.apt:

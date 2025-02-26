@@ -27,6 +27,7 @@ powerline-font:
 	rm -rf fonts
 
 appimaged:
+	@# Taken from https://github.com/probonopd/go-appimage/blob/master/src/appimaged/README.md
 	@# System integration for AppImages
 	@# Remove pre-existing conflicting tools (if any)
 	systemctl --user stop appimaged.service || true

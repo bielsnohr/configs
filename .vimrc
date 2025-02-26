@@ -129,12 +129,6 @@ let g:Tex_UseMakefile = 0
 let g:Tex_DefaultTargetFormat = 'pdf'
 autocmd Filetype tex setlocal ts=2 sw=2 expandtab
 
-"  YouCompleteMe settings
-" --------------------------------------
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_global_ycm_extra_conf = '~/configs/.ycm_global_extra_conf.py'
-map <leader>yg  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-map <leader>yd  :YcmCompleter GetDoc<CR>
 
 "  Syntastic settings
 " --------------------------------------

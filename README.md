@@ -2,12 +2,12 @@
 
 ## TODO
 
-- A default Python environment with some base packages installed
+- [ ] A default Python environment with some base packages installed
   - pipx
   - probably want to move to something like `uv` or `pyenv` for this
-- automatically add key shortcut for Keepass autocomplete
-- default terminal application is set by `update-alternatives --config x-terminal-emulator`, however
-  this does mean its icon doesn't display quite properly, which is minor
+- [ ] Move away from using omf because it is no longer maintained
+- [ ] Move AppImage setup to ansible
+- [ ] automatically add key shortcut for Keepass autocomplete
 - additional shortcut for opening terminal is set in dconf
   `org.gnome.settings-daemon.plugins.media-keys="['<Primary><Alt>t', '<Primary><Alt>n']"`
 - UKAEA specific config
@@ -52,4 +52,31 @@
     # executing them
     ansible-playbook --ask-become-pass --verbose playbook.yml
     ```
-    
+
+If the default terminal application isn't set by installing terminator as part
+of the above, then it can manually be set through this interactive command:
+
+```bash
+update-alternatives --config x-terminal-emulator
+```
+
+### Syncthing
+
+There doesn't seem to be a good ansible role for this available, so just
+manually go through the steps at <https://apt.syncthing.net/>. To get
+auto-start working, see the `Makefile`.
+
+### AppImages
+
+KeePassXC and Obsidian rely on AppImages. The Ansible install step will install
+the prerequisites for running these easily. There is system integration step
+that makes using these more like other applications. The steps are in the
+Makefile under `appimaged`.
+
+### Android Studio
+
+Download tar file from <https://www.jetbrains.com/toolbox-app/> to
+`~/Applications/`. Extract it and then run the executable (it is an AppImage).
+This should auto-add the executable to relevant locations and make a desktop
+entry.
+
