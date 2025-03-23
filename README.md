@@ -80,3 +80,11 @@ Download tar file from <https://www.jetbrains.com/toolbox-app/> to
 This should auto-add the executable to relevant locations and make a desktop
 entry.
 
+### GSConnect / KDEConnect
+
+To allow my Android phone to control this machine, install the GNOME shell
+extension [GSConnect](https://extensions.gnome.org/extension/1319/gsconnect/).
+Simply click flick the "switch" to on.
+The local host manager, `chrome-gnome-shell`, should have been installed by
+the Ansible step.
+Then, from the KDE Connect Android app, link with this device.

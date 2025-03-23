@@ -33,6 +33,7 @@
         - inkscape
         - gnome-tweaks
         - ssh
+        - chrome-gnome-shell # for GNOME extensions
         - terminator # should also set the default terminal app
         - fish=3.7.*
         # for AppImages and JetBrains Toolbox
