@@ -97,18 +97,6 @@ python-poetry:
 	pipx install poetry
 	poetry completions fish > ~/.config/fish/completions/poetry.fish
 	
-fish-default-shell:
-	sudo add-apt-repository ppa:fish-shell/release-3
-	sudo apt update
-	sudo apt install fish=3.7.1-1~jammy
-	# somehow fish is able to pick up PATH values set by bashrc, so no need
-	# for anything further
-	chsh -s $(which fish)
-
-install-omf: fish-default-shell
-	curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > install-omf
-	fish install-omf --path=~/.local/share/omf --config=~/.config/omf
-
 npm:
 	curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
 	sudo bash nodesource_setup.sh
