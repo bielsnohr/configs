@@ -88,3 +88,5 @@ Simply click flick the "switch" to on.
 The local host manager, `chrome-gnome-shell`, should have been installed by
 the Ansible step.
 Then, from the KDE Connect Android app, link with this device.
+If you run into trouble, consult
+[the wiki for the extension](https://github.com/GSConnect/gnome-shell-extension-gsconnect/wiki/Installation#standard).
