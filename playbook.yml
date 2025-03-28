@@ -79,3 +79,14 @@
       vim +PluginInstall +qall
     become: false
     become_user: "{{ target_user }}"
+
+  - name: Install fisher plugin manager for fish
+    ansible.builtin.shell: |
+      curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher && fisher update
+    become_user: "{{ target_user }}"
+  
+  - name: Install rust and cargo
+    ansible.builtin.shell:
+      cmd: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+      creates: ~/.cargo
+    become_user: "{{ target_user }}"
