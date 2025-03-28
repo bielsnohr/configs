@@ -45,7 +45,9 @@
     pipx install --include-deps ansible
     ```
 
-4. Run ansible playbook:
+4. Launch a new terminal for path changes and new configs to take effect.
+
+5. Run ansible playbook:
 
     ```bash
     # Add `--check` argument to see what the effects will be before actually

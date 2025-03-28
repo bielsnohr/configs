@@ -7,16 +7,17 @@
 
 - link:
     ~/.vimrc: .vimrc
+    ~/.vim/bundle/Vundle.vim:
+      path: vim/Vundle.vim
     ~/.gitconfig: .gitconfig
     ~/.ssh/config: .ssh_config
     ~/.config/fish:
       path: fish
       force: true
-    ~/.config/omf: 
-      path: omf
-      force: true
     ~/.config/terminator/config: terminator_config
-    ~/.bashrc: .bashrc
+    ~/.bashrc: 
+      path: .bashrc
+      force: true
     ~/.bash_profile: .bash_profile
     ~/.Rprofile: Rprofile
 

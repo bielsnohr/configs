@@ -4,6 +4,9 @@
   connection: local
   gather_facts: no
   become: yes
+  vars:
+    target_user: mbluteau
+    target_group: mbluteau
 
   tasks:
   # Fish doesn't have a build for Ubuntu 24.04 Noble in its more 
@@ -57,5 +60,22 @@
 
   - name: Set default shell
     ansible.builtin.user:
-      name: mbluteau
+      name: "{{ target_user }}"
       shell: /usr/bin/fish
+
+  - name: Ensure vim temp directories exist
+    ansible.builtin.file:
+      path: "{{ item }}"
+      state: directory
+      owner: "{{ target_user }}"
+      group: "{{ target_group }}"
+    loop:
+      - ~/.tmp
+      - ~/.bkp
+    become: false
+
+  - name: Install vim plugins
+    ansible.builtin.shell: |
+      vim +PluginInstall +qall
+    become: false
+    become_user: "{{ target_user }}"
