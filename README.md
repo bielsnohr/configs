@@ -75,6 +75,21 @@ the prerequisites for running these easily. There is system integration step
 that makes using these more like other applications. The steps are in the
 Makefile under `appimaged`.
 
+### Font
+
+The fish prompt and other programming tools use patched / extended fonts that
+require some glyphs not usually in system fonts. It doesn't appear to be easy
+to automatically install these, so manually do it with the following:
+
+```bash
+mkdir -p ~/Downloads/fonts/Meslo
+cd ~/Downloads/fonts/Meslo
+curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.tar.xz
+tar -xvJf Meslo.tar.xz
+```
+
+Then, click on `MesloLGSNerdFontMono-Regular.ttf` and `Install`.
+
 ### Android Studio
 
 Download tar file from <https://www.jetbrains.com/toolbox-app/> to
