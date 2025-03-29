@@ -90,3 +90,14 @@
       cmd: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
       creates: ~/.cargo
     become_user: "{{ target_user }}"
+
+  - name: Swap capslock and ctrl keys
+    ansible.builtin.shell: |
+      gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']"
+    become_user: "{{ target_user }}"
+
+  - name: Install appimaged
+    ansible.builtin.shell:
+      cmd: fish appimaged.fish
+      creates: ~/Applications/appimaged*.AppImage
+    become_user: "{{ target_user }}"
