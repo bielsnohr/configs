@@ -36,7 +36,9 @@
         - inkscape
         - gnome-tweaks
         - ssh
+        - btop
         - python-is-python3
+        - pipx
         - chrome-gnome-shell # for GNOME extensions
         - terminator # should also set the default terminal app
         - fish=3.7.*
@@ -100,4 +102,25 @@
     ansible.builtin.shell:
       cmd: fish appimaged.fish
       creates: ~/Applications/appimaged*.AppImage
+    become_user: "{{ target_user }}"
+
+  - name: Install vscode
+    ansible.builtin.shell:
+      cmd: fish vscode.fish
+      creates: /usr/share/code/code
+
+  - name: Install firefox
+    ansible.builtin.shell:
+      cmd: fish firefox.fish
+      creates: /usr/bin/firefox
+
+  - name: Install ollama
+    ansible.builtin.shell:
+      cmd: curl -fsSL https://ollama.com/install.sh | sh
+      creates: /usr/local/bin/ollama
+
+  - name: Install llm cli
+    ansible.builtin.shell:
+      cmd: pipx install llm && llm install llm-ollama
+      creates: ~/.local/bin/llm
     become_user: "{{ target_user }}"
