@@ -35,10 +35,13 @@
         - curl
         - inkscape
         - gnome-tweaks
+        - evolution-ews
         - ssh
         - btop
         - python-is-python3
         - pipx
+        - restic
+        - rclone
         - chrome-gnome-shell # for GNOME extensions
         - terminator # should also set the default terminal app
         - fish=3.7.*

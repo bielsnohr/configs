@@ -20,10 +20,12 @@
       force: true
     ~/.bash_profile: .bash_profile
     ~/.Rprofile: Rprofile
+    ~/bin/restic_backup.bash: restic_backup.bash
 
 - create:
     - ~/Downloads
     - ~/.config
+    - ~/bin
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
