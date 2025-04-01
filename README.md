@@ -40,6 +40,25 @@ of the above, then it can manually be set through this interactive command:
 update-alternatives --config x-terminal-emulator
 ```
 
+### SSH Keys
+
+The best balance between security and convenience on Ubuntu appears to be to
+let the built in `Passwords and Keys` application (also called `seahorse`) to
+manage things. It will link the SSH key to the session login and therefore
+unlock the key when you login to the machine, meaning you won't have to
+repeatedly enter a passphrase when connecting by ssh or using git.
+
+Open the `Passwords and Keys` GUI and under the `SSH Keys` folder, click the
+button to add a new one. Be sure to add a passphrase and save that to KeePass
+for good measure.
+
+Upon the first time the key is used, you will be prompted to enter the
+passphrase. The should be the one and only time you need to do this, as long as
+you click the check box "Automatically unlock this key upon login" (or
+something to that effect).
+
+Copy the public key to GitHub, GitLab, etc.
+
 ### Syncthing
 
 There doesn't seem to be a good ansible role for this available, so just
