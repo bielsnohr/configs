@@ -2,8 +2,8 @@
 - name: Sync Ubuntu machines
   hosts: localhost
   connection: local
-  gather_facts: no
-  become: yes
+  gather_facts: false
+  become: true
   vars:
     target_user: mbluteau
     target_group: mbluteau
@@ -127,3 +127,8 @@
       cmd: pipx install llm && llm install llm-ollama
       creates: ~/.local/bin/llm
     become_user: "{{ target_user }}"
+
+  - name: Install uv for Python
+    ansible.builtin.shell:
+      cmd: curl -LsSf https://astral.sh/uv/install.sh | sh
+      creates: "/home/{{ target_user }}/.local/bin/uv"

@@ -1,0 +1,41 @@
+---
+- name: Sync Work Ubuntu machines
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  become: yes
+  vars:
+    target_user: mbluteau
+    target_group: mbluteau
+    split_vpn_src: "/home/{{ target_user}}/src/vpn_ukaea"
+
+  tasks:
+    - name: Install apt-based packages
+      ansible.builtin.apt:
+        state: present
+        pkg:
+          - restic
+          - rclone
+          - openfortivpn
+          - ppp
+
+    - name: Clean up
+      ansible.builtin.apt:
+        autoclean: yes
+        autoremove: yes
+
+    - name: Clone the split VPN Git repository
+      ansible.builtin.git:
+        repo: "git@git.ccfe.ac.uk:mbluteau/vpn-ukaea.git"
+        dest: "{{ split_vpn_src }}" # Replace with your desired destination path
+        version: "main" # Replace with the branch or tag you want to clone
+        accept_newhostkey: true
+      become_user: "{{ target_user }}"
+
+    - name: Install split VPN
+      ansible.builtin.shell: |
+        cd "{{ split_vpn_src }}" && sudo make install
+      args:
+        executable: /bin/bash
+      tags:
+        - run_make
