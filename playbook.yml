@@ -132,6 +132,7 @@
     ansible.builtin.shell:
       cmd: curl -LsSf https://astral.sh/uv/install.sh | sh
       creates: "/home/{{ target_user }}/.local/bin/uv"
+    register: uv_install
 
   - name: Install uv completions
     vars:
@@ -139,3 +140,4 @@
     ansible.builtin.shell:
       cmd: "uv generate-shell-completion > {{ completion_file }}"
       creates: "{{ completion_file }}"
+    when: uv_install is success
