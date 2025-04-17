@@ -11,8 +11,9 @@
       path: vim/Vundle.vim
     ~/.gitconfig: .gitconfig
     ~/.ssh/config: .ssh_config
-    ~/.config/fish:
-      path: fish
+    ~/.config/fish/:
+      path: fish/**
+      glob: true
       force: true
     ~/.config/terminator/config: terminator_config
     ~/.bashrc: 
