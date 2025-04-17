@@ -132,3 +132,10 @@
     ansible.builtin.shell:
       cmd: curl -LsSf https://astral.sh/uv/install.sh | sh
       creates: "/home/{{ target_user }}/.local/bin/uv"
+
+  - name: Install uv completions
+    vars:
+      completion_file: "/home/{{ target_user }}/.config/fish/completions/uv.fish"
+    ansible.builtin.shell:
+      cmd: "uv generate-shell-completion > {{ completion_file }}"
+      creates: "{{ completion_file }}"
