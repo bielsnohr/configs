@@ -68,9 +68,19 @@ auto-start working, see the `Makefile`.
 ### AppImages
 
 KeePassXC and Obsidian rely on AppImages. The Ansible install step will install
-the prerequisites for running these easily. There is system integration step
-that makes using these more like other applications. The steps are in the
-Makefile under `appimaged`.
+the `appimaged` service that integrates AppImages into the system, such as being available from the
+general search.
+
+AppImageUpdate should also be installed to keep the AppImages on the system updated.
+These updates need to be done manually.
+
+### Obsidian
+
+Download the AppImage from the website to `~/Applications`.
+
+### KeePassXC
+
+Download the AppImage from the website to `~/Applications`.
 
 ### Font
 
@@ -86,6 +96,9 @@ tar -xvJf Meslo.tar.xz
 ```
 
 Then, click on `MesloLGSNerdFontMono-Regular.ttf` and `Install`.
+
+Finally, rebuild the font cache: `fc-cache -f -v`. And probably restart any app you are using that
+might depend on the fonts.
 
 ### Android Studio
 
