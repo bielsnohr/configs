@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# This is a shim to ease the use of the KeePassXC AppImage as a CLI
+~/Applications/KeePassXC-*.AppImage cli "$@"

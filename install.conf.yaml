@@ -22,6 +22,7 @@
     ~/.bash_profile: .bash_profile
     ~/.Rprofile: Rprofile
     ~/bin/restic_backup.bash: restic_backup.bash
+    ~/bin/keepassxc-cli: keepassxc-cli
 
 - create:
     - ~/Downloads
