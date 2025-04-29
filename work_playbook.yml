@@ -39,3 +39,7 @@
         executable: /bin/bash
       tags:
         - run_make
+    
+    - name: Install gh CLI
+      ansible.builtin.shell:
+        cmd: bash gh_cli.bash
