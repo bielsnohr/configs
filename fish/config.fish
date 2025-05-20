@@ -29,3 +29,4 @@ fish_add_path --global ~/bin ~/.npm-global/bin ~/.local/bin ~/gems/bin ~/.local/
 
 ## Abbreviations and shortcuts
 abbr -a -- sb 'cd ~/work/projects/step_bluemira/code/ && code step-blueprint-develop.code-workspace'
+abbr -a -- crm 'cd ~/work/projects/crm/crfax && code .'
