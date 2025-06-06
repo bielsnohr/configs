@@ -133,6 +133,11 @@
       cmd: fish firefox.fish
       creates: /usr/bin/firefox
 
+  - name: Install zotero
+    ansible.builtin.shell:
+      cmd: fish zotero.fish
+      creates: /usr/bin/zotero
+
   - name: Install ollama
     ansible.builtin.shell:
       cmd: curl -fsSL https://ollama.com/install.sh | sh
