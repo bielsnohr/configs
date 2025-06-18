@@ -1,4 +1,4 @@
-# Matthew Bluteau's Configuration Files
+# Matthew's Configuration Files
 
 ## New System Installation Steps
 
@@ -135,6 +135,12 @@ with success:
    gives nice explanations.
 2. `llama3.2:3b`: more compact and runs quicker. Probably better for coding
    stuff?
+
+## Work Setup
+
+- eduroam config is on Nucleus
+  - take note of the correct mobile app `Get Eduroam` because there is an old `eduroamCAT` hanging around that is non-functional!
+- Most other config is automated in another Ansible playbook: `ansible-playbook --ask-become-pass --verbose work_playbook.yml`
 
 ## TODO
 
