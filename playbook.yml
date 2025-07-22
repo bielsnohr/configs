@@ -47,6 +47,7 @@
         - chrome-gnome-shell # for GNOME extensions
         - terminator # should also set the default terminal app
         - fish=3.7.*
+        - pdftk-java
         # for AppImages and JetBrains Toolbox
         - libfuse2 
         - libxi6
