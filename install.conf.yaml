@@ -23,6 +23,7 @@
     ~/.Rprofile: Rprofile
     ~/bin/restic_backup.bash: restic_backup.bash
     ~/bin/keepassxc-cli: keepassxc-cli
+    ~/.ipython/profile_default/ipython_config.json: ipython_config.json
 
 - create:
     - ~/Downloads
