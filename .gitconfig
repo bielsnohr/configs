@@ -1,6 +1,6 @@
 [user]
-	email = matthew.bluteau@ukaea.uk
-	name = Matthew Bluteau
+	email = 6177028+bielsnohr@users.noreply.github.com
+	name = bielsnohr
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
