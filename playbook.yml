@@ -136,7 +136,7 @@
 
   - name: Install zotero
     ansible.builtin.shell:
-      cmd: fish zotero.fish
+      cmd: fish zotero/zotero.fish
       creates: /usr/bin/zotero
 
   - name: Install ollama

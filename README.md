@@ -144,6 +144,8 @@ with success:
 
 ## TODO
 
+- [ ] Consider if something like `chezmoi` is better than `dotbot`. It seems to be the most popular
+  dotfile manager at the moment.
 - [ ] A default Python environment with some base packages installed
   - pipx
   - probably want to move to something like `uv` or `pyenv` for this
