@@ -48,6 +48,9 @@
         - terminator # should also set the default terminal app
         - fish=3.7.*
         - pdftk-java
+        - fzf
+        - bat
+        - fd-find
         # for AppImages and JetBrains Toolbox
         - libfuse2 
         - libxi6
