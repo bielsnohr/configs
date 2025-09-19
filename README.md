@@ -65,6 +65,10 @@ There doesn't seem to be a good ansible role for this available, so just
 manually go through the steps at <https://apt.syncthing.net/>. To get
 auto-start working, see the `Makefile`.
 
+TODO there appears to be a GNOME indicator for syncthing, but it doesn't pick up that it is already
+running with my current setup. This is probably because I need to add it as a service like
+[on the syncthing autostart page](https://docs.syncthing.net/users/autostart.html#using-systemd).
+
 ### AppImages
 
 KeePassXC and Obsidian rely on AppImages. The Ansible install step will install
