@@ -34,6 +34,7 @@
         - make
         - curl
         - inkscape
+        - calibre
         - gnome-tweaks
         - evolution-ews
         - ssh
