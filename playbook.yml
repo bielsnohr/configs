@@ -135,7 +135,7 @@
 
   - name: Install firefox
     ansible.builtin.shell:
-      cmd: fish firefox.fish
+      cmd: fish firefox/firefox.fish
       creates: /usr/bin/firefox
   
   - name: PWAs for Firefox native package
@@ -151,6 +151,8 @@
         # Refresh repositories and install the package
         sudo apt update
         sudo apt install firefoxpwa
+        # Create an apparmor profile to get rid of security warnings
+        sudo cp firefox/firefoxpwa.apparmor /etc/apparmor.d/firefoxpwa
       creates: /usr/bin/firefoxpwa
 
   - name: Install zotero
