@@ -88,7 +88,7 @@
 
   - name: Install vim plugins
     ansible.builtin.shell: |
-      vim +PluginInstall +qall
+      vim +PluginInstall +qall > /dev/null 2>&1
     become: false
     become_user: "{{ target_user }}"
 
