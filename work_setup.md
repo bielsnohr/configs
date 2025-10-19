@@ -31,7 +31,7 @@ This should be done by the `work_playbook.yml`; however, make sure you have exch
 This requires access to the GitLab Web UI, so you will probably need to be on site to do this.
 
 ```bash
-ansible-playbook --ask-become-pass --verbose playbook.yml
+ansible-playbook --ask-become-pass --verbose work_playbook.yml
 ```
 
 ## Printing
