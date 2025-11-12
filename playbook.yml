@@ -75,6 +75,12 @@
       name: "{{ target_user }}"
       shell: /usr/bin/fish
 
+  - name: Install some ansible stuff for working in VS Code
+    ansible.builtin.shell:
+      cmd: pipx install ansible-dev-tools ansible-lint
+      creates: [~/.local/bin/ansible-lint, ~/.local/bin/adt]
+    become_user: "{{ target_user }}"
+
   - name: Ensure vim temp directories exist
     ansible.builtin.file:
       path: "{{ item }}"
@@ -187,3 +193,21 @@
       creates: "{{ completion_file }}"
     when: uv_install is success
     become_user: "{{ target_user }}"
+
+  - name: Remove any apt-based packages that conflict with docker
+    ansible.builtin.apt:
+      state: absent
+      pkg:
+        - docker.io
+        - docker-doc
+        - docker-compose
+        - docker-compose-v2
+        - podman-docker
+        - containerd
+        - runc
+  
+  - name: Install docker
+    ansible.builtin.command:
+      cmd: install_docker.sh
+      creates: /usr/bin/docker
+    
