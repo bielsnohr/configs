@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
 
 # This is a shim to ease the use of the KeePassXC AppImage as a CLI
-~/Applications/KeePassXC-*.AppImage cli "$@"
+shopt -s nullglob
+apps=( ~/Applications/KeePassXC-*.AppImage )
+if [ ${#apps[@]} -eq 0 ]; then
+  echo "KeePassXC AppImage not found in ~/Applications" >&2
+  exit 1
+fi
+# pick the AppImage with the highest numeric/version order and exec it
+best=$(printf '%s\n' "${apps[@]}" | sort -V | tail -n1)
+exec "$best" cli "$@"
