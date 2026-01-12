@@ -27,6 +27,7 @@
     ~/Zotero/locate/engines.json: 
       path: zotero/engines.json
       force: true
+    ~/.local/share/applications/weekly_planner.desktop: desktop/weekly_planner.desktop
 
 - create:
     - ~/Downloads
