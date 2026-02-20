@@ -77,6 +77,11 @@ general search.
 
 AppImageUpdate should also be installed to keep the AppImages on the system updated.
 These updates need to be done manually.
+Notably, for KeePassXC the browser integration will probably break on update
+because it relies on the exact path to the binary.
+You might need to go to the configuration file that Firefox uses and edit the KeePassXC path
+therein:
+`.mozilla/native-messaging-hosts/org.keepassxc.keepassxc_browser.json`
 
 ### Obsidian
 

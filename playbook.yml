@@ -54,6 +54,9 @@
         - fzf
         - bat
         - fd-find
+        - ruby-full
+        - build-essential
+        - zlib1g-dev
         # for AppImages and JetBrains Toolbox
         - libfuse2 
         - libxi6
