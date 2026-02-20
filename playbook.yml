@@ -213,6 +213,5 @@
   
   - name: Install docker
     ansible.builtin.command:
-      cmd: install_docker.sh
+      cmd: install_docker.bash
       creates: /usr/bin/docker
-    

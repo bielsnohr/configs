@@ -149,7 +149,18 @@ with success:
 
 - eduroam config is on Nucleus
   - take note of the correct mobile app `Get Eduroam` because there is an old `eduroamCAT` hanging around that is non-functional!
-- Most other config is automated in another Ansible playbook: `ansible-playbook --ask-become-pass --verbose work_playbook.yml`
+- Most other config is automated in another Ansible playbook: `ansible-playbook --ask-become-pass
+  --verbose work_playbook.yml`
+
+## Updating
+
+This should be as simple as:
+
+```bash
+git submodule update --remote {vim/Vundle.vim, dotbot}
+```
+
+The submodules should be configured to follow the relevant branches of their respective remotes.
 
 ## TODO
 
