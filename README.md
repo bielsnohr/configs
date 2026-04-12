@@ -162,6 +162,30 @@ git submodule update --remote {vim/Vundle.vim, dotbot}
 
 The submodules should be configured to follow the relevant branches of their respective remotes.
 
+## Troubleshooting
+
+### Zotero apt update failures
+
+If you run into apt and software updates failing because of the following:
+
+```text
+Err:15 https://zotero.retorque.re/file/apt-package-archive ./ InRelease        
+  The HTTP server sent an invalid Content-Range header Bad header data [IP: 172.67.136.194 443]
+...
+W: Failed to fetch https://zotero.retorque.re/file/apt-package-archive/./InRelease  The HTTP server sent an invalid Content-Range header Bad header data [IP: 172.67.136.194 443]
+W: Some index files failed to download. They have been ignored, or old ones used instead.
+```
+
+Run these commands to clear out junk related to the Zotero apt repo:
+
+```bash
+sudo rm -rf /var/lib/apt/lists/partial/*
+sudo apt-get clean
+sudo apt-get -o Acquire::http::No-Cache=true -o Acquire::http::Pipeline-Depth=0 update
+```
+
+Source: <https://github.com/retorquere/zotero-deb/issues/118>
+
 ## TODO
 
 - [ ] Consider if something like `chezmoi` is better than `dotbot`. It seems to be the most popular
@@ -171,7 +195,7 @@ The submodules should be configured to follow the relevant branches of their res
 - [ ] A default Python environment with some base packages installed
   - pipx
   - probably want to move to something like `uv` or `pyenv` for this
-- [ ] Move away from using omf because it is no longer maintained
+- [x] Move away from using omf because it is no longer maintained
 - [ ] Move AppImage setup to ansible
 - [ ] automatically add key shortcut for Keepass autocomplete
 - additional shortcut for opening terminal is set in dconf
