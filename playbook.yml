@@ -34,6 +34,7 @@
         - make
         - curl
         - inkscape
+        - gimp
         - calibre
         - gnome-tweaks
         - evolution-ews
@@ -58,7 +59,7 @@
         - build-essential
         - zlib1g-dev
         # for AppImages and JetBrains Toolbox
-        - libfuse2 
+        - libfuse2
         - libxi6
         - libxrender1
         - libxtst6
@@ -197,6 +198,7 @@
       cmd: "uv generate-shell-completion > {{ completion_file }}"
       creates: "{{ completion_file }}"
     when: uv_install is success
+    become: true
     become_user: "{{ target_user }}"
 
   - name: Remove any apt-based packages that conflict with docker
@@ -210,8 +212,19 @@
         - podman-docker
         - containerd
         - runc
-  
+
   - name: Install docker
     ansible.builtin.command:
       cmd: install_docker.bash
       creates: /usr/bin/docker
+
+  - name: Create docker group
+    ansible.builtin.group:
+      name: docker
+      state: present
+
+  - name: Put user in docker group
+    ansible.builtin.user:
+      name: "{{ target_user }}"
+      groups: docker
+      append: true
