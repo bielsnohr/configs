@@ -192,23 +192,8 @@ Source: <https://github.com/retorquere/zotero-deb/issues/118>
   dotfile manager at the moment.
 - [ ] Figure out how to update `appimaged` properly
 - [ ] Add instructions for ProtonVPN if it proves useful: <https://protonvpn.com/support/official-linux-vpn-ubuntu/>
-- [ ] A default Python environment with some base packages installed
-  - pipx
-  - probably want to move to something like `uv` or `pyenv` for this
-- [x] Move away from using omf because it is no longer maintained
 - [ ] Move AppImage setup to ansible
 - [ ] automatically add key shortcut for Keepass autocomplete
-- additional shortcut for opening terminal is set in dconf
-  `org.gnome.settings-daemon.plugins.media-keys="['<Primary><Alt>t', '<Primary><Alt>n']"`
-- UKAEA specific config
-  - VPN script, clone it into my user space
-  - Network configuration
-- implement interim solution for keyboard in Makefile
-  - the command line way per-user: `gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']"`
-  - edit the file `/etc/default/keyboard` to have the line
-    `XKBOPTIONS="ctrl:swapcaps"`
-  - be careful that there might be options already set, so this should be
-    appended rather than overwriting the whole line
 - use of `ukaea_mount.sh` requires creation of `~/linux_{home,work}`, so put
   this in makefile as well
 
