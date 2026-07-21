@@ -63,3 +63,7 @@ Host ripley
 Host github.com
 	Hostname ssh.github.com
 	Port 443
+
+Host csd3
+	HostName login-s-2.hpc.cam.ac.uk 
+	User ir-blut1

@@ -57,3 +57,9 @@ Access through Firefox is fine.
 Use the version called [`miniforge`](https://github.com/conda-forge/miniforge),
 which ensures that you don't use Anaconda channels to avoid any licence nasties.
 The installer is super simple. Decline the shell initialisation since this should already be handled by other configs.
+
+## Carpentries Workbench
+
+1. Install R: `sudo apt install r-base`
+2. Install [positron](https://positron.posit.co/download.html) or Rstudio
+3. Install Carpentries dependencies as described here: https://carpentries.github.io/sandpaper-docs/#linux

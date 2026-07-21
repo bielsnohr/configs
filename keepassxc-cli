@@ -2,7 +2,7 @@
 
 # This is a shim to ease the use of the KeePassXC AppImage as a CLI
 shopt -s nullglob
-apps=( ~/Applications/KeePassXC-*.AppImage )
+apps=(~/Applications/KeePassXC-*.AppImage)
 if [ ${#apps[@]} -eq 0 ]; then
   echo "KeePassXC AppImage not found in ~/Applications" >&2
   exit 1
