@@ -29,6 +29,7 @@
     ansible.builtin.apt:
       state: present
       pkg:
+        - ripgrep
         - git
         - vim-gtk3
         - make
