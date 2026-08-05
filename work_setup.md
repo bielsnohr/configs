@@ -45,6 +45,11 @@ This requires access to the GitLab Web UI, so you will probably need to be on si
 ansible-playbook --ask-become-pass --verbose work_playbook.yml
 ```
 
+## eduroam
+
+Eduroam config is on Nucleus (search for it).
+Take note of the correct mobile app `Get Eduroam` because there is an old `eduroamCAT` hanging around that is non-functional!
+
 ## Printing
 
 TODO check the setup that Harry figured out.

@@ -147,10 +147,7 @@ with success:
 
 ## Work Setup
 
-- eduroam config is on Nucleus
-  - take note of the correct mobile app `Get Eduroam` because there is an old `eduroamCAT` hanging around that is non-functional!
-- Most other config is automated in another Ansible playbook: `ansible-playbook --ask-become-pass
-  --verbose work_playbook.yml`
+See the separate [work setup](./work_setup.md) document.
 
 ## Updating
 
