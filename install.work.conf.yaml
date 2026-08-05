@@ -1,0 +1,11 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+- link:
+    ~/.config/systemd/user/rclone-onedrive.service: systemd/rclone-onedrive.service
+- shell:
+  - |
+    systemctl --user daemon-reload
+    systemctl --user enable rclone-onedrive.service
+    systemctl --user restart rclone-onedrive.service

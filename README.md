@@ -188,6 +188,8 @@ Source: <https://github.com/retorquere/zotero-deb/issues/118>
 
 ## TODO
 
+- [ ] Make an rclone mount of OneDrive on work laptop; turn this into systemd service
+  - command: `rclone mount onedrive:/ ~/work/onedrive/ --network-mode --vfs-cache-mode full`
 - [ ] Consider if something like `chezmoi` is better than `dotbot`. It seems to be the most popular
   dotfile manager at the moment.
 - [ ] Figure out how to update `appimaged` properly

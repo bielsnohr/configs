@@ -1,17 +1,28 @@
 # Work Setup Steps
 
+Before doing general setup,
+perform the [Restic Backups](#restic-backups) steps below.
+Then, run the following after having done the steps in [the README](./README.md):
+
+```fish
+./install --config install.work.conf.yaml
+./install --config install.conf.yaml
+ansible-playbook --ask-become-pass --verbose work_playbook.yml
+```
+
 ## Restic Backups
 
 1. Configure `rclone` using the wizard: `rclone config`. Most of the defaults
    should be fine. The `~/.config/rclone.conf` file should look like:
 
-   ```
+   ```text
    [onedrive]
    type = onedrive
    token = {"access_token":"created_by_auth_step"}
    drive_id = b!Q5YrEtTxwEuNUNHZ4-vUiGS9ogGmq45Hg6b_iT4fJ6ByxiFgvSJKSIADB6_lBCCR
    drive_type = business
    ```
+
 2. Run the backup from terminal (script should be in path): `restic_backup.bash`.
 
 ## Restoring from Restic Backup
