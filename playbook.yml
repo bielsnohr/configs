@@ -129,11 +129,13 @@
   - name: Keyboard shortcuts and setup
     ansible.builtin.shell: |
       gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:swapcaps']"
-      gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Primary><Alt>t', '<Primary><Alt>n']" 
-      gsettings set org.gnome.settings-daemon.plugins.media-keys calculator "['<Control><Alt>k']" 
-      gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Control><Alt>o']" 
-      gsettings set org.gnome.settings-daemon.plugins.media-keys control-center "['<Control><Alt>m']" 
-      gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Control><Alt>h']" 
+      gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Primary><Alt>t', '<Primary><Alt>n']"
+      gsettings set org.gnome.settings-daemon.plugins.media-keys calculator "['<Control><Alt>k']"
+      gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Control><Alt>o']"
+      gsettings set org.gnome.settings-daemon.plugins.media-keys control-center "['<Control><Alt>m']"
+      gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Control><Alt>h']"
+      gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-purple'
+      gsettings set org.gnome.desktop.interface icon-theme 'Yaru-purple'
     become_user: "{{ target_user }}"
 
   - name: Install appimaged
