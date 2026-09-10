@@ -2,6 +2,7 @@
 # These directories may definitely be excluded #
 ################################################
 # User defined
+work/onedrive/
 ferro/
 .safe/
 VirtualBox VMs/
