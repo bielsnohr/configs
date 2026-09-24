@@ -145,6 +145,14 @@ with success:
 2. `llama3.2:3b`: more compact and runs quicker. Probably better for coding
    stuff?
 
+### Docker Sandbox for Coding Harness
+
+After running the Ansible playbook, you will need to authenticate the Docker sandbox command:
+
+```bash
+sbx login
+```
+
 ## Work Setup
 
 See the separate [work setup](./work_setup.md) document.

@@ -38,6 +38,7 @@
         - gimp
         - calibre
         - gnome-tweaks
+        - gnome-software
         - evolution-ews
         - ssh
         - pandoc
@@ -74,8 +75,15 @@
 
   - name: Clean up
     ansible.builtin.apt:
-      autoclean: yes
-      autoremove: yes
+      autoclean: true
+      autoremove: true
+  
+  - name: Remove unneeded or conflicting snap packages
+    community.general.snap:
+      name: "{{ item }}"
+      state: absent
+    loop:
+      - snap-store
 
   - name: Set default shell
     ansible.builtin.user:
@@ -216,10 +224,17 @@
         - containerd
         - runc
 
-  - name: Install docker
-    ansible.builtin.command:
+  - name: Check whether docker and sbx are installed
+    ansible.builtin.shell: command -v docker && command -v sbx
+    register: docker_check
+    changed_when: false
+    failed_when: false
+
+  - name: Install docker and sbx
+    ansible.builtin.script:
       cmd: install_docker.bash
-      creates: /usr/bin/docker
+    when: docker_check.rc != 0
+    register: docker_install
 
   - name: Create docker group
     ansible.builtin.group:
@@ -231,3 +246,19 @@
       name: "{{ target_user }}"
       groups: docker
       append: true
+
+  - name: Put user in kvm group, so that they can run virtual machines
+    ansible.builtin.user:
+      name: "{{ target_user }}"
+      groups: kvm
+      append: true
+
+  - name: Install sbx completions
+    vars:
+      completion_file: "/home/{{ target_user }}/.config/fish/completions/sbx.fish"
+    ansible.builtin.shell:
+      cmd: "sbx completion fish > {{ completion_file }}"
+      creates: "{{ completion_file }}"
+    when: docker_check is success or docker_install is success
+    become: true
+    become_user: "{{ target_user }}"
