@@ -147,11 +147,44 @@ with success:
 
 ### Docker Sandbox for Coding Harness
 
-After running the Ansible playbook, you will need to authenticate the Docker sandbox command:
+1. Docker `sbx` will be installed with ansible.
+2. `sbx login` to authenticate with Docker Hub.
+3. Ensure you have access to the inference cluster domains.
+   Either be on VPN for all network traffic,
+   or if using a split VPN tunnel ensure the inference domain is resolved and routed.
+4. Set details for port forwarding under `inference-tunnel` in `.ssh_config`.
+5. Set sbx to allow connection to host port: for example `sbx policy allow network localhost:8001`
+6. Create `opencode` config, critically replacing any reference to `localhost` or `127.0.0.1` with `host.docker.internal`. For example:
 
-```bash
-sbx login
-```
+  ```json
+  {
+  "$schema": "https://opencode.ai/config.json",
+  "permission": "allow",
+  "enabled_providers": ["local"],
+  "model": "local/qwen3.8.27b",
+  "small_model": "local/qwen3.8.27b",
+  "provider": {
+      "local": {
+      "name": "Local worker",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+          "baseURL": "http://host.docker.internal:8001/v1",
+          "apiKey": "{env:OPENAI_API_KEY}"
+      },
+      "models": {
+          "qwen3.8.27b": {
+          "name": "Qwen 3.8 27B",
+          "tool_call": true,
+          "limit": {
+              "context": 262144,
+              "output": 32768
+          }
+          }
+      }
+      }
+  }
+  }
+  ```
 
 ## Work Setup
 
