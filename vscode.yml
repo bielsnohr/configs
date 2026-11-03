@@ -1,0 +1,53 @@
+---
+# Install the latest stable VS Code .deb on Ubuntu/Debian.
+# Usage: include_tasks: vscode.yml  (requires become: true)
+
+- name: Gather architecture facts if not already present
+  ansible.builtin.setup:
+    gather_subset: [min]
+  when: ansible_facts['architecture'] is not defined
+
+- name: Map system architecture to VS Code platform string
+  ansible.builtin.set_fact:
+    vscode_platform: >-
+      {{ {
+        'x86_64': 'linux-deb-x64',
+        'aarch64': 'linux-deb-arm64',
+        'armv7l': 'linux-deb-armhf'
+      }[ansible_facts['architecture']] }}
+
+- name: Query VS Code update API for latest stable release
+  ansible.builtin.uri:
+    url: "https://update.code.visualstudio.com/api/update/{{ vscode_platform }}/stable/latest"
+    return_content: true
+  register: vscode_release
+
+- name: Gather installed package facts
+  ansible.builtin.package_facts:
+    manager: apt
+
+- name: Determine whether VS Code needs installing or upgrading
+  ansible.builtin.set_fact:
+    vscode_latest: "{{ vscode_release.json.productVersion }}"
+    vscode_installed: "{{ ansible_facts.packages['code'][0].version | default('') if 'code' in ansible_facts.packages else '' }}"
+
+- name: Download and install VS Code
+  when: not vscode_installed.startswith(vscode_latest)
+  block:
+    - name: Download VS Code {{ vscode_latest }} .deb
+      ansible.builtin.get_url:
+        url: "{{ vscode_release.json.url }}"
+        dest: "/tmp/vscode-{{ vscode_latest }}.deb"
+        checksum: "sha256:{{ vscode_release.json.sha256hash }}"
+        mode: "0644"
+
+    - name: Install VS Code {{ vscode_latest }}
+      ansible.builtin.apt:
+        deb: "/tmp/vscode-{{ vscode_latest }}.deb"
+      become: true
+
+  always:
+    - name: Remove downloaded .deb
+      ansible.builtin.file:
+        path: "/tmp/vscode-{{ vscode_latest }}.deb"
+        state: absent

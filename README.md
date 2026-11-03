@@ -224,6 +224,24 @@ sudo apt-get -o Acquire::http::No-Cache=true -o Acquire::http::Pipeline-Depth=0 
 
 Source: <https://github.com/retorquere/zotero-deb/issues/118>
 
+## Ubuntu System Update
+
+### 24 -> 26
+
+Follow steps above. Because of system Python changes, you will need to run `pipx reinstall-all` instead of `pipx install`.
+
+Unfortunately, Firefox will probably get replaced by the snap version,
+and ansible won't pick this up because the Firefox binary will be on the system,
+so manually run `fish firefox/firefox.fish`.
+It must be possible to specify in the update configuration that Firefox should not be touched.
+
+Network configuration also got reset for some reason,
+so had to re-authenticate.
+
+There was also a manual transfer of source `.list` to `.sources` file type for the 3rd party software sources I use.
+
+It also appears that the installation of VS Code has changed so that the fish script is no longer necessary.
+
 ## TODO
 
 - [ ] Look into using https://github.com/PeterMosmans/ansible-role-customize-gnome for setting

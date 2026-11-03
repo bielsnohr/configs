@@ -7,24 +7,7 @@
   vars:
     target_user: mbluteau
     target_group: mbluteau
-
   tasks:
-  # Fish doesn't have a build for Ubuntu 24.04 Noble in its more 
-  # up-to-date repo yet. Use the below once it does.
-  #
-  #- name: Add additional PPAs for installation sources
-  #  ansible.builtin.apt_repository:
-  #    repo: "{{ item }}"
-  #    state: present
-  #  loop:
-  #    - ppa:fish-shell/release-3
-  #
-  #- name: Install specific version of fish and prevent upgrades
-  #  ansible.builtin.apt:
-  #    name: fish
-  #    state: fixed
-  #    version: '3.7.1-1'
-
   - name: Install apt-based packages
     ansible.builtin.apt:
       state: present
@@ -52,7 +35,7 @@
         - shfmt
         - chrome-gnome-shell # for GNOME extensions
         - terminator # should also set the default terminal app
-        - fish=3.7.*
+        - fish
         - pdftk-java
         - fzf
         - bat
@@ -72,13 +55,18 @@
         - dbus-user-session
         # For connecting to android devices
         - android-sdk-platform-tools-common
+  
+  - name: Install VS Code
+    import_tasks: vscode.yml
+    become: true
+    tags: vscode
 
   - name: Clean up
     ansible.builtin.apt:
       autoclean: true
       autoremove: true
   
-  - name: Remove unneeded or conflicting snap packages
+  - name: Remove un-needed or conflicting snap packages
     community.general.snap:
       name: "{{ item }}"
       state: absent
