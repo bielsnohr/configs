@@ -6,6 +6,7 @@
   [[default]]
     audible_bell = True
     background_darkness = 0.88
+    background_type = transparent
     font = MesloLGS Nerd Font Mono 14
     scroll_on_output = True
     scrollback_lines = 3000
@@ -24,6 +25,16 @@
     scrollback_infinite = True
     use_system_font = False
     use_theme_colors = True
+    bold_is_bright = True
+    title_transmit_bg_color = "#705697"
+  [[swc other programmer]]
+    audible_bell = True
+    background_darkness = 0.88
+    font = MesloLGS Nerd Font Mono 14
+    scroll_on_output = True
+    scrollback_lines = 3000
+    scrollback_infinite = True
+    use_system_font = False
     bold_is_bright = True
     title_transmit_bg_color = "#705697"
 [layouts]

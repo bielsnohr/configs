@@ -28,6 +28,7 @@
       path: zotero/engines.json
       force: true
     ~/.local/share/applications/weekly_planner.desktop: desktop/weekly_planner.desktop
+    ~/.config/ghostty/config: ghostty_config
 
 - create:
     - ~/Downloads
